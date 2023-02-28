@@ -67,3 +67,81 @@ class RequisicaoFachada(http.Controller):
                     'res_id': new_task.id,
                 })
         return http.request.render('remake.forms_success_page')
+
+
+class AudioVisualKamico(http.Controller):
+    @http.route('/audiovisualkamico', auth='public', csrf=False, website=True)
+    def index(self, **kw):
+        return http.request.render('remake.audiovisualkamico', {
+        })
+
+    @http.route('/audiovisualkamico', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+
+        quadrado = post.get('quadrado')
+        vertical = post.get('vertical')
+        horizontal = post.get('horizontal')
+        ig = post.get('ig')
+
+        youtube = post.get('Youtube')
+        facebook = post.get('Facebook')
+        instagram = post.get('Instagram')
+        whatsapp = post.get('WhatsApp')
+        stories = post.get('Stories')
+        linkedin = post.get('LinkedIn')
+        reels = post.get('Reels')
+
+        quadrado = quadrado if quadrado == 'Quadrado 1:1 (1080x1080)' else ''
+        vertical = vertical if vertical == 'Vertical 9:16 (1080x1920)' else ''
+        horizontal = horizontal if horizontal == 'Horizontal 16:9 (1920x1080)' else ''
+        ig = ig if ig == 'IG 4:5 (1080x1350)' else ''
+
+        youtube = youtube if youtube == 'Youtube' else ''
+        facebook = facebook if facebook == 'Facebook' else ''
+        instagram = instagram if instagram == 'Instagram' else ''
+        whatsapp = whatsapp if whatsapp == 'WhatsApp' else ''
+        stories = stories if stories == 'Stories' else ''
+        linkedin = linkedin if linkedin == 'LinkedIn' else ''
+        reels = reels if reels == 'Reels' else ''
+
+        project_id = request.env.ref('remake.audiovisualkamico').id
+        description = f"""
+            Seu nome:{post.get('nome')}<br></br>
+            Departamento:{post.get('departamento')}<br></br>
+            Título da solicitação:{post.get('tituloSolicitacao')}<br></br>
+            Demanda:{post.get('demanda')}<br></br>
+            Data da captação:{post.get('dataCaptacao')}<br></br>
+            Precisa de fotos:{post.get('precisaFoto')}<br></br>
+            Resolução:{post.get('resolucao')}<br></br>
+            Refere a empresa KAMI:{post.get('referenteKami')}<br></br>
+            Proporção do arquivo:{quadrado, vertical, horizontal, ig}<br></br>
+            Tempo de vídeo estimado:{post.get('tamanhoVideo')}<br></br>
+            Onde deseja compartilhá-la:{youtube, facebook, instagram, whatsapp, stories, linkedin, reels}  -  Quais outros locais:{post.get('outrosLocais')}<br></br>
+            Trilha ou referência de trilha:{post.get('trilhaReferencia')}<br></br>
+            Lettering/GC:{post.get('lettering')} -- O que?{post.get('oQue')}<br></br>
+            Incluir logotipo:{post.get('incluiLogotipo')} -- {post.get('logotipoLocal')}<br></br>
+            Animação:{post.get('animacao')}<br></br>
+            Referência:{post.get('referencia')}<br></br>
+            Detalhes da solicitação:{post.get('detalhesSolicitacao')}<br></br>
+            Briefing/Roteiro:{post.get('briefing')}<br></br>
+            Prazo de entrega estimado:{post.get('prazoEntrega')}<br></br>
+        """
+        task_vals = {
+            'name': f"{post.get('nome')}-{post.get('departamento')}",
+            'project_id': project_id,
+            'description': description,
+        }
+
+        new_task = request.env["project.task"].sudo().create(task_vals)
+
+        if 'task_attachment' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('task_attachment')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+
+                })
+        return http.request.render('remake.forms_success_page')

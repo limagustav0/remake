@@ -8,6 +8,7 @@
   'data': [
       'templates/remake.xml',
       'templates/forms_success_page.xml',
+      'templates/audiovisualkamico.xml',
   ],
   'installable': True,
   'auto_install': False,

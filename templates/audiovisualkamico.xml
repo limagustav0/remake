@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="audiovisualkamico" >
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <img 
+                      class="img-thumbnail rounded float-left"
+                      t-attf-src='kami_forms/static/description/icon.png'
+                      style="height: 270px; width: 270px;"
+                    />
+                    <h3>Solicitações de Marketing
+                    </h3>
+                    <p><i>
+                        Utilize este formulário para abrir solicitações para a equipe de marketing!
+                    </i></p>
+                  </div>      
+                  <div class="col-sm-8">
+
+                    <form class="col-md-6" t-attf-action="/audiovisualkamico" method="post" enctype="multipart/form-data">
+                        <div>
+                            <legend>Seu nome</legend>
+                            <input type='text' name='nome'></input>
+                            <legend>Departamento</legend>
+                            <input type='text' name='departamento'></input>
+                            <legend>Título da solicitação</legend>
+                            <input type='text' name='tituloSolicitacao'></input>
+                        </div>
+                        <div>
+                            <legend>Demanda</legend>
+                            <input type='radio' id='Edição' name='demanda' value='Edição' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifCaptacao').style.display = 'none';
+                            }
+                            "/>
+                            <label for='Edição'>Edição</label>
+                            <input type='radio' id='Captação' name='demanda' value='Captação' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifCaptacao').style.display = 'block';
+                            }
+                            "/>
+                            <label for='Captação'>Captação</label>
+                            <input type='radio' id='Captação e Edição' name='demanda' value='Captação e Edição' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifCaptacao').style.display = 'block';
+                            }
+                            " />
+                            <label for='Captação e Edição'>Captação e Edição</label>
+                            <div style='display: none' id='ifCaptacao'>
+                                <legend>Data da captação:</legend>
+                                <input type='date' name='dataCaptacao'></input>
+                            </div>
+                        </div>
+                        <div>
+                            <lenged>Precisa de fotos?</lenged>
+                            <input type='radio' id='Sim' name='precisaFoto' value='Sim'/>
+                            <label for='Sim'>Sim</label>
+                            <input type='radio' id='Não' name='precisaFoto' value='Não'/>
+                            <label for='Não'>Não</label>
+                        </div>
+                        <div>
+                            <lenged>Qual resolução?</lenged>
+                            <input type='radio' id='Full HD' name='resolucao' value='Full HD'/>
+                            <label for='Full HD'>Full HD</label>
+                            <input type='radio' id='4K' name='resolucao' value='4K'/>
+                            <label for='4K'>4K</label>
+                        </div>
+                        <div>
+                            <div>
+                            <legend>Essa solicitação se refere a qual empresa KAMI?</legend>
+                            <input type='radio' id='KAMI for Business' name='referenteKami' value='KAMI for Business'/>
+                            <label for='KAMI for Business'>KAMI for Business</label>
+                            <input type='radio' id='KAMI CO. São Paulo' name='referenteKami' value='KAMI CO. São Paulo'/>
+                            <label for='KAMI CO. São Paulo'>KAMI CO. São Paulo</label>
+                            <input type='radio' id='KAMI CO. Rio de Janeiro' name='referenteKami' value='KAMI CO. Rio de Janeiro'/>
+                            <label for='KAMI CO. Rio de Janeiro'>KAMI CO. Rio de Janeiro</label>
+                            <input type='radio' id='KAMI CO. Rio Grande do Sul' name='referenteKami' value='KAMI CO. Rio Grande do Sul'/>
+                            <label for='KAMI CO. Rio Grande do Sul'>KAMI CO. Rio Grande do Sul</label>
+                            <input type='radio' id='KAMI CO. Portugal' name='referenteKami' value='KAMI CO. Portugal'/>
+                            <label for='KAMI CO. Portugal'>KAMI CO. Portugal</label>
+                            </div>
+                            <div>
+                            <input type='radio' id='Beautyline' name='referenteKami' value='Beautyline'/>
+                            <label for='Beautyline'>Beautyline</label>
+                            <input type='radio' id='Kami Cabeleireiros' name='referenteKami' value='Kami Cabeleireiros'/>
+                            <label for='Kami Cabeleireiros'>Kami Cabeleireiros</label>
+                            <input type='radio' id='Kiosk L Oreal' name='referenteKami' value='Kiosk LOreal'/>
+                            <label for='Kiosk L Oreal'>Kiosk L'Oreal</label>
+                            <input type='radio' id='Hair Pro' name='referenteKami' value='Hair Pro'/>
+                            <label for='Hair Pro'>Hair Pro</label>
+                            <input type='radio' id='Grupo KAMI' name='referenteKami' value='Grupo KAMI'/>
+                            <label for='Grupo KAMI'>Grupo KAMI</label>
+                            <input type='radio' id='Medical Clean' name='referenteKami' value='Medical Clean'/>
+                            <label for='Medical Clean'>Medical Clean</label>
+                            </div>
+                        </div>
+                        <div>
+                            <legend>Proporção do arquivo</legend>
+                            <input type='checkbox' name='quadrado' value='Quadrado 1:1 (1080x1080)'>Quadrado 1:1 (1080x1080)</input>
+                            <input type='checkbox' name='vertical' value='Vertical 9:16 (1080x1920)'>Vertical 9:16 (1080x1920)</input>
+                            <input type='checkbox' name='horizontal' value='Horizontal 16:9 (1920x1080)'>Horizontal 16:9 (1920x1080)</input>
+                            <input type='checkbox' name='ig' value='IG 4:5 (1080x1350)'>IG 4:5 (1080x1350)</input>
+                        </div>
+                        <div>
+                            <legend>Tempo de vídeo estimado?</legend>
+                            <input type='text' name='tamanhoVideo'></input>
+                        </div>
+                        <div>
+                            <legend>Onde deseja compartilhá-la?</legend>
+                            <input type='checkbox' name='Youtube' value='Youtube' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">Youtube</input>
+                            <input type='checkbox' name='Facebook' value='Facebook' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">Facebook</input>
+                            <input type='checkbox' name='Instagram' value='Instagram' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">Instagram</input>
+                            <input type='checkbox' name='WhatsApp' value='WhatsApp' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">WhatsApp</input>
+                            <input type='checkbox' name='Stories' value='Stories' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">Stories</input>
+                            <input type='checkbox' name='LinkedIn' value='LinkedIn' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">LinkedIn</input>
+                            <input type='checkbox' name='Reels' value='Reels' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'none';
+                            }
+                            ">Reels</input>
+                            <input type='checkbox' name='Outros locais' value='Outros locais' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutrosLocais').style.display = 'block';
+                            }
+                            ">Outros locais</input>
+                            
+                            <div style='display: none' id='ifOutrosLocais'>
+                                <legend>Quais outros locais?</legend>
+                                <input type='text' name='outrosLocais'></input>
+                            </div>
+                        </div>
+                        <div>
+                            <legend>Trilha ou referência de trilha:</legend>
+                            <input type='text' name='trilhaReferencia'></input>
+                        </div>
+                        <div>
+                            <legend>Lettering/GC</legend>
+                            <input type='radio' id='Sim' name='lettering' value='Sim' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifLettering').style.display = 'block';
+                            }
+                            "/>
+                            <label for='Sim'>Sim</label>
+                            <input type='radio' id='Não' name='lettering' value='Não' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifLettering').style.display = 'none';
+                            }
+                            "/>
+                            <label for='Não'>Não</label>
+                            <div style='display: none' id='ifLettering'>
+                                <legend>O que?</legend>
+                                <textarea rows='8' cols='40' name='oQue'></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <legend>Incluir logotipo?</legend>
+                            <input type='radio' id='Sim' name='incluiLogotipo' value='Sim' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifLogo').style.display = 'block';
+                            }
+                            "/>
+                            <label for='Sim'>Sim</label>
+                            <input type='radio' id='Não' name='incluiLogotipo' value='Não' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifLogo').style.display = 'none';
+                            }
+                            "/>
+                            <label for='Não'>Não</label>
+                            <div style='display: none' id='ifLogo'>
+                                <legend>Onde?</legend>
+                                <select name='logotipoLocal'>
+                                    <option value='null'>Escolha uma opção</option>
+                                    <option value='Centro'>Centro</option>
+                                    <option value='Centro superior'>Centro superior</option>
+                                    <option value='Centro inferior'>Centro inferior</option>
+                                    <option value='Inferior direito'>Inferior direito</option>
+                                    <option value='Inferior esquerdo'>Inferior esquerdo</option>
+                                    <option value='Superior direito'>Superior direito</option>
+                                    <option value='Superior esquerdo'>Superior esquerdo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <legend>Animação?</legend>
+                            <input type='radio' id='Sim' name='animacao' value='Sim' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifAnimacao').style.display = 'block';
+                            }
+                            "/>
+                            <label for='Sim'>Sim</label>
+                            <input type='radio' id='Não' name='animacao' value='Não' t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifAnimacao').style.display = 'none';
+                            }
+                            "/>
+                            <label for='Não'>Não</label>
+                            <div style='display: none' id='ifAnimacao'>
+                                <legend>Referência:</legend>
+                                <textarea rows='8' cols='40' name='referencia'></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <legend>Anexo:</legend>
+                            <input type='file' name='task_attachment' multiple='True'></input>
+                        </div>
+                        <div>
+                            <legend>Detalhes da solicitação:</legend>
+                            <textarea rows='8' cols='40' name='detalhesSolicitacao'></textarea>
+                        </div>
+                        <div>
+                            <legend>Briefing/Roteiro:</legend>
+                            <textarea rows='8' cols='40' name='briefing'></textarea>
+                        </div>
+                        <div>
+                            <legend>Prazo de entrega estimado</legend>
+                            <input type='date' name='prazoEntrega'></input>
+                        </div>
+                        <input type="submit" value="Enviar"/>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </t>
+    </template>
+</odoo>

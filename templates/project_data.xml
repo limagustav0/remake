@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="remake.digital_invite_project" model="project.project">
+            <field name="name">Arte Para Convites Digitais</field>
+        </record>
+    </data>
+    <data noupdate="1">
+      <record id="remake.facade_project" model="project.project">
+          <field name="name">Arte Para Fachadas</field>
+      </record>
+  </data>
+  <data noupdate="1">
+    <record id="remake.mala_tecnica_project" model="project.project">
+        <field name="name">Mala Técnica</field>
+    </record>
+  </data>
+  <data noupdate="1">
+    <record id="remake.audiovisualkamico" model="project.project">
+        <field name="name">Audiovisual KAMI CO.</field>
+    </record>
+  </data>
+</odoo>
