@@ -21,7 +21,7 @@ class RequisicaoFachada(http.Controller):
             'facade_ad_type_ids': facade_ad_type_ids,
         })
     
-    @http.route('/facades_request', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    @http.route('/remake', type='http', auth='public', website=True, methods=['POST'], csrf=False)
     def create(self, **post):
         facade_type = http.request.env.ref('kami_sm.facade').id
         date = str(post.get('data_vencimento')).replace('/', '-')
@@ -66,4 +66,4 @@ class RequisicaoFachada(http.Controller):
                     'res_model': 'kami_sm.attendance',
                     'res_id': new_task.id,
                 })
-        return http.request.render('kami_forms.forms_success_page')
+        return http.request.render('remake.forms_success_page')
