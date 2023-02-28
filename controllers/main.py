@@ -11,14 +11,14 @@ class RequisicaoFachada(http.Controller):
     def index(self, **kw):
         users = http.request.env['res.users'].sudo().search([])
         partners = http.request.env['res.partner'].sudo().search([])
-        facade_ad_type_ids = http.request.env['kami_sm.attendance.ad_type'].search([]),
-        #partners = request.env['res.partner'].sudo().search([])
+        facade_ad_type_ids = http.request.env['kami_sm.attendance.ad_type'].sudo().search([])
+        partners = request.env['res.partner'].sudo().search([])
         
         return http.request.render('remake.remake', {
             'partners': partners,
             'users': users,
             'partners': partners,
-            #'facade_ad_type_ids': facade_ad_type_ids
+            'facade_ad_type_ids': facade_ad_type_ids,
         })
     
     @http.route('/facades_request', type='http', auth='public', website=True, methods=['POST'], csrf=False)
