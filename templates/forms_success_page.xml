@@ -10,7 +10,7 @@
               <div class="row">
                 <div id="page-left" class="card w-100 m-2">
                   <img 
-                    class="card-img-top" t-attf-src="/kami_forms/static/description/icon.png"
+                    class="card-img-top" t-attf-src="/remake/static/description/icon.png"
                   />    
                   <h4 id="page-card-title" class="card-header">Concluído!</h4>
                   <div class="card-body">

@@ -6,12 +6,13 @@
   'license': 'GPL-3 or any later version',
   'depends': ['base', 'project', 'website','web','kami_sm'],
   'data': [
-      'templates/remake.xml',
+      
       'templates/forms_success_page.xml',
-      'templates/audiovisualkamico.xml',
+      'templates/audiovisual_kamico.xml',
       'templates/planejamento_campanha_marketing.xml',
       'templates/project_data.xml',
       'templates/mala_tecnica.xml',
+      'templates/fachada.xml',
   ],
   'installable': True,
   'auto_install': False,

@@ -7,21 +7,21 @@ from dataclasses import dataclass
 from requests import post
 
 class RequisicaoFachada(http.Controller):
-    @http.route('/remake', auth='public', type="http", website=True, csrf=False)
+    @http.route('/fachada', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
         users = http.request.env['res.users'].sudo().search([])
         partners = http.request.env['res.partner'].sudo().search([])
         facade_ad_type_ids = http.request.env['kami_sm.attendance.ad_type'].sudo().search([])
         partners = request.env['res.partner'].sudo().search([])
         
-        return http.request.render('remake.remake', {
+        return http.request.render('remake.fachada', {
             'partners': partners,
             'users': users,
             'partners': partners,
             'facade_ad_type_ids': facade_ad_type_ids,
         })
     
-    @http.route('/remake', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    @http.route('/fachada', type='http', auth='public', website=True, methods=['POST'], csrf=False)
     def create(self, **post):
         facade_type = http.request.env.ref('kami_sm.facade').id
         date = str(post.get('data_vencimento')).replace('/', '-')
@@ -63,10 +63,10 @@ class RequisicaoFachada(http.Controller):
                 http.request.env['ir.attachment'].sudo().create({
                     'name': "imagens adicionais" + attachment.filename,
                     'datas': base64.b64encode(attachment.read()),
-                    'res_model': 'kami_sm.attendance',
+                    'res_model': 'kami_sm.attendance',  
                     'res_id': new_task.id,
                 })
-        return http.request.render('remake.forms_success_page')
+        return http.request.render('remake.fachada')
 
 class AudioVisualKamico(http.Controller):
     @http.route('/audiovisualkamico', auth='public', csrf=False, website=True)

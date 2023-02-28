@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="remake" name="Kami Forms - Input Nome">
+    <template id="fachada" name="Kami Forms - Input Nome">
         <title>Nova requisição de fachada</title>
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
@@ -14,7 +14,7 @@
                         </i></p>
                     </div>
                     <div class="col-sm-8">
-                        <form method="post" action="/remake" enctype="multipart/form-data">
+                        <form method="post" action="/fachada" enctype="multipart/form-data">
                             <label for="inputNome">*Nome do Salão Solicitante:</label><br></br>
                             <select name="saloon_name" required='required'>
                                 <option value='' ></option>
