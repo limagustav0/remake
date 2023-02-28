@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="audiovisualkamico" >
+    <template id="audiovisual_kamico" >
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
                 <div class="row">
                   <div class="col-sm-4">
                     <img 
                       class="img-thumbnail rounded float-left"
-                      t-attf-src='kami_forms/static/description/icon.png'
+                      t-attf-src='remake/static/description/icon.png'
                       style="height: 270px; width: 270px;"
                     />
                     <h3>Solicitações de Marketing

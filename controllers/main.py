@@ -68,7 +68,6 @@ class RequisicaoFachada(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
 
-
 class AudioVisualKamico(http.Controller):
     @http.route('/audiovisualkamico', auth='public', csrf=False, website=True)
     def index(self, **kw):
@@ -145,3 +144,95 @@ class AudioVisualKamico(http.Controller):
 
                 })
         return http.request.render('remake.forms_success_page')
+    
+class HelpdeskTicket(http.Controller):
+    @http.route('/helpdeskticket', auth='public', csrf=False, website=True)
+    def index(self, **kw):
+        types = http.request.env['helpdesk.ticket.type']
+        categories = http.request.env['helpdesk.ticket.category']
+        priorities = {
+            0: _('Baixa'),
+            1: _('Média'),
+            2: _('Alta'),
+            3: _('Urgente')
+        }
+        return http.request.render('remake.helpdesk_ticket', {
+            'types': types.sudo().search([]),
+            'categories': categories.sudo().search([]),
+            'priorities': priorities
+        })
+
+    @http.route('/helpdeskticket', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        ticket_vals = {
+            'name': f"{post.get('subject')}",
+            'type_id': int(post.get('type')),
+            'category_id': int(post.get('category')),
+            'description': post.get('description'),
+            'priority': post.get('priority')
+        }
+
+        new_ticket = http.request.env["helpdesk.ticket"].sudo().create(
+            ticket_vals)
+        if 'attachment' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist(
+                'attachment')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'helpdesk.ticket',
+                    'res_id': new_ticket.id,
+                })
+        return http.request.render('remake.forms_success_page')
+    
+class MalaTecnica(http.Controller):
+    @http.route('/malatecnica', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        users = http.request.env['res.users']
+        return http.request.render('remake.mala_tecnica', {
+            'users': users.sudo().search([]),
+        })
+
+    @http.route('/malatecnica', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.mala_tecnica_project').id
+        description = f"""
+                Departamento:{post.get('department')} <br></br>
+                Solicitação:{post.get('solicitation')} <br></br>
+                Responsavel:{post.get('responsible')} <br></br>
+                Observações / Solicitação:{post.get('comments')}
+        """
+        new_task = {
+            'name': f"{post.get('department')}-{post.get('solicitation')}",
+            'project_id': project_id,
+            'user_id': int(post.get('responsible')),
+            'description': description,
+        }
+        http.request.env["project.task"].sudo().create(new_task)
+        return http.request.render('remake.forms_success_page', {})
+    
+class PlanejamentoCampanhaMarketing(http.Controller):
+    @http.route('/planejamentocampanhamarketing', auth='public', csrf=False)
+    def index(self, **kw):
+        return http.request.render('remake.planejamentocampanhamarketing', {
+        })
+
+    @http.route('/planejamentocampanhamarketing', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.digital_invite_project').id
+        description = f"""
+            Nome da campanha:{post.get('nomeCampanha')}<br></br>
+            Tipos de Campanha:{post.get('tipoCampanha')}<br></br>
+            Ano:{post.get('ano')}<br></br>
+            Briefing da campanha:{post.get('briefing')}<br></br>
+            periodo:{post.get('periodo')}<br></br>
+            Vencimento do Planejamento:{post.get('dataVencimento')}<br></br>
+        """
+        new_task = {
+            'name': f"{post.get('nomeCampanha')}-{post.get('tipoCampanha')}-{post.get('ano')}",
+            'project_id': project_id,
+            'description': description,
+        }
+        http.request.env["project.task"].sudo().create(new_task)
+        return http.request.render('remake.forms_success_page', {})
