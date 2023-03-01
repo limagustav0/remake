@@ -15,6 +15,7 @@
       'templates/planejamento_campanha_marketing.xml',
       'templates/romaneio.xml',
       'templates/invasao_truss.xml',
+      'templates/criativo.xml',
   ],
   'installable': True,
   'auto_install': False,

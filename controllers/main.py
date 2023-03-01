@@ -301,5 +301,72 @@ class GerenciamentoInvasaoTruss(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
 
+class CriativoKamico(http.Controller): 
+    @http.route('/criativo', auth='public', type="http", website=True, csrf=False)
+    def index(self, **kw):
+        return http.request.render('remake.criativo')
+    
+    @http.route('/criativo', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.criativo_kami').id
+
+        description = f"""
+            Título da solicitação: {post.get('notification_title')}<br/><br/>
+            Essa solicitação se refere a qual empresa KAMI?: {post.get('solicitation')}<br/><br/>
+
+            Tipo da solicitação: {post.get('notification_type')}<br/><br/>
+
+            Onde deseja compartilhá-la?: {post.get('Email') if post.get('Email') else " "}<br/>
+                                 {post.get('Mídiassociais') if post.get('Mídiassociais') else " "}<br/>
+                                 {post.get('Youtube') if post.get('Youtube') else " "}<br/>
+                                 {post.get('WhatsApp') if post.get('WhatsApp') else " "}<br/>
+                                 {post.get('Stories') if post.get('Stories') else " "}<br/>
+                                 {post.get('Materialimpresso') if post.get('Materialimpresso') else " "}<br/>
+                                 {post.get('Workplace') if post.get('Workplace') else " "}<br/>
+                                 {post.get('LinkedIn') if post.get('LinkedIn') else " "}<br/>
+                                 {post.get('Outroslocais') if post.get('Outroslocais') else " "}<br/><br/><br/>
+
+            Inserir Logotipo: {post.get('KAMICO') if post.get('KAMICO') else " "}<br/>
+                              {post.get('SBMP') if post.get('SBMP') else " "}<br/>
+                              {post.get('TRUSSHair') if post.get('TRUSSHair') else " "}<br/>
+                              {post.get('HairSPA') if post.get('HairSPA') else " "}<br/>
+                              {post.get('HairPro') if post.get('HairPro') else " "}<br/>
+                              {post.get('LogodoCliente') if post.get('LogodoCliente') else " "}<br/>
+                              {post.get('Outros') if post.get('Outros') else " "}<br/>
+                              {post.get('SemLogo') if post.get('SemLogo') else " "}<br/><br/><br/>
+            
+            
+            Detalhes da solicitação: {post.get('solicitation_detail')}<br/><br/><br/>
+
+            Prazo de entrega estimado: {post.get('data_prazo')}<br/><br/><br/>
+
+            Seu nome: {post.get('yourname')}<br/><br/><br/>
+
+            Seu e-mail: {post.get('yourmail')}<br/><br/><br/>
+
+            Por onde você deseja receber o arquivo final?: {post.get('channel')}<br/><br/><br/>
+
+ 
+
+
+        """
+        new_task = {
+            'name': 'Definir nome',
+            'project_id': project_id,
+            'description': description,
+        }
+        new_task = http.request.env["project.task"].sudo().create(new_task)
+        if 'aditional_archives' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+        return http.request.render('remake.forms_success_page')
+
+
 
 
