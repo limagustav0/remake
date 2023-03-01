@@ -38,4 +38,10 @@
         <field name="name">Criativo KAMI CO.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+    <record id="remake.lancamento_educacional_mvp" model="project.project">
+        <field name="name">Marketing de Conteúdo.</field>
+    </record>
+  </data>
 </odoo>

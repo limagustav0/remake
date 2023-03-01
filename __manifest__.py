@@ -16,6 +16,7 @@
       'templates/romaneio.xml',
       'templates/invasao_truss.xml',
       'templates/criativo.xml',
+      'templates/educacional_mvp.xml',
   ],
   'installable': True,
   'auto_install': False,

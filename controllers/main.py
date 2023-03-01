@@ -367,6 +367,42 @@ class CriativoKamico(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
 
+class LancamentoEducacionalMvp(http.Controller):
+    @http.route('/educacionalmvp', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        users = http.request.env['res.users']
+        return http.request.render('remake.educacionalmvp', {
+            'users': users.search([])
+        })
+
+    @http.route('/educacionalmvp', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.lancamento_educacional_mvp').id
+        description = f""""
+                Atividade:{post.get('atividade')}<br></br>
+                Descrição da atividade:{post.get('descricaoAtividade')}<br></br>
+                Data preferida para entrega:{post.get('dataEntrega')}<br></br>
+                Prioridade:{post.get('priority')}<br></br>
+                Responsável pela atividade:{post.get('responsavel')}<br></br>
+        """
+        new_task = {
+            'name': f"{post.get('atividade')}-{post.get('responsavel')}-{post.get('priority')}",
+            'project_id': project_id,
+            'description': description,
+        }
+
+        new_task = http.request.env["project.task"].sudo().create(new_task)
+        if 'anexo' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('anexo')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+        return http.request.render('remake.forms_success_page')
+
 
 
 
