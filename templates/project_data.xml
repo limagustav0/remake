@@ -16,7 +16,7 @@
     </record>
   </data>
   <data noupdate="1">
-    <record id="remake.audiovisualkamico" model="project.project">
+    <record id="remake.audiovisual_kamico" model="project.project">
         <field name="name">Audiovisual KAMI CO.</field>
     </record>
   </data>

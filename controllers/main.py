@@ -68,13 +68,13 @@ class RequisicaoFachada(http.Controller):
                 })
         return http.request.render('remake.fachada')
 
-class AudioVisualKamico(http.Controller):
-    @http.route('/audiovisualkamico', auth='public', csrf=False, website=True)
+class AudioVisual(http.Controller):
+    @http.route('/audiovisual', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
-        return http.request.render('remake.audiovisualkamico', {
+        return http.request.render('remake.audiovisual', {
         })
 
-    @http.route('/audiovisualkamico', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    @http.route('/audiovisual', type='http', auth='public', website=True, methods=['POST'], csrf=False)
     def create(self, **post):
 
         quadrado = post.get('quadrado')
@@ -103,7 +103,7 @@ class AudioVisualKamico(http.Controller):
         linkedin = linkedin if linkedin == 'LinkedIn' else ''
         reels = reels if reels == 'Reels' else ''
 
-        project_id = request.env.ref('remake.audiovisualkamico').id
+        project_id = request.env.ref('remake.audiovisual').id
         description = f"""
             Seu nome:{post.get('nome')}<br></br>
             Departamento:{post.get('departamento')}<br></br>
@@ -213,12 +213,14 @@ class MalaTecnica(http.Controller):
         return http.request.render('remake.forms_success_page', {})
     
 class PlanejamentoCampanhaMarketing(http.Controller):
-    @http.route('/planejamentocampanhamarketing', auth='public', csrf=False)
+
+        
+    @http.route('/planejamentocampanhamarketing', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
         return http.request.render('remake.planejamentocampanhamarketing', {
         })
 
-    @http.route('/planejamentocampanhamarketing', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    @http.route('/planejamentocampanhamarketing', type='http', auth='public', website=True, methods=['POST'], csrf=False)
     def create(self, **post):
         project_id = request.env.ref('remake.digital_invite_project').id
         description = f"""

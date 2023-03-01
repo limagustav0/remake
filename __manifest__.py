@@ -8,11 +8,11 @@
   'data': [
       
       'templates/forms_success_page.xml',
-      'templates/audiovisual_kamico.xml',
-      'templates/planejamento_campanha_marketing.xml',
+      'templates/audiovisual.xml',
       'templates/project_data.xml',
       'templates/mala_tecnica.xml',
       'templates/fachada.xml',
+      'templates/planejamento_campanha_marketing.xml',
   ],
   'installable': True,
   'auto_install': False,

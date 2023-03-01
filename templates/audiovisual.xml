@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="audiovisual_kamico" >
+    <template id="audiovisual" name="Kami Forms - Input Nome">
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
                 <div class="row">
@@ -18,7 +18,7 @@
                   </div>      
                   <div class="col-sm-8">
 
-                    <form class="col-md-6" t-attf-action="/audiovisualkamico" method="post" enctype="multipart/form-data">
+                    <form method="post" action="/audiovisual" enctype="multipart/form-data">
                         <div>
                             <legend>Seu nome</legend>
                             <input type='text' name='nome'></input>
