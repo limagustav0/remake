@@ -14,6 +14,7 @@
       'templates/fachada.xml',
       'templates/planejamento_campanha_marketing.xml',
       'templates/romaneio.xml',
+      'templates/invasao_truss.xml',
   ],
   'installable': True,
   'auto_install': False,

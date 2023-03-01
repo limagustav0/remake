@@ -237,7 +237,6 @@ class PlanejamentoCampanhaMarketing(http.Controller):
         http.request.env["project.task"].sudo().create(new_task)
         return http.request.render('remake.forms_success_page', {})
     
-
 class ControleRomaneio(http.Controller): 
     @http.route('/romaneio', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
@@ -263,5 +262,44 @@ class ControleRomaneio(http.Controller):
         http.request.env["project.task"].sudo().create(new_task)
         return http.request.render('remake.forms_success_page', {})
     
+class GerenciamentoInvasaoTruss(http.Controller): 
+    @http.route('/invasaotruss', auth='public', type="http", website=True, csrf=False)
+    def index(self, **kw):
+
+        return http.request.render('remake.invasaotruss', {
+
+        })
     
+    @http.route('/invasaotruss', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.invasao_truss').id
+
+        description = f"""
+            Tipo Notificação: {post.get('region_invasion') if post.get('region_invasion') else " "}     {post.get('invalid_sell') if post.get('invalid_sell') else " "}<br><br/>
+            Data de Recebimento: {post.get('dataRecebimento')}<br><br/>
+            Empresa Notificada: {post.get('Movement') if post.get('Movement') else " "}     {post.get('NewHauss') if post.get('NewHauss') else " "}     {post.get('RiodeJaneiro') if post.get('RiodeJaneiro') else " "}<br><br/>
+            Prazo de Resposta: {post.get('Prazo')}<br><br/>
+            Número ''OCTADESK: {post.get('octadesk_number')}<br><br/>
+            Local onde o produto foi encontrado: {post.get('found_location')}<br><br/>
+            Nome do Cliente: {post.get('client_name')}<br><br/>
+            Prioridade: {post.get('priority')}<br><br/>
+        """
+        new_task = {
+            'name': 'Definir nome',
+            'project_id': project_id,
+            'description': description,
+        }
+        new_task = http.request.env["project.task"].sudo().create(new_task)
+        if 'aditional_archives' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+        return http.request.render('remake.forms_success_page')
+
+
 

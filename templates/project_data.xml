@@ -26,4 +26,10 @@
         <field name="name">Controle de Romaneio.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+    <record id="remake.invasao_truss" model="project.project">
+        <field name="name">Notificações Invasão TRUSS.</field>
+    </record>
+  </data>
 </odoo>
