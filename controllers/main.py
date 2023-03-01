@@ -212,9 +212,7 @@ class MalaTecnica(http.Controller):
         http.request.env["project.task"].sudo().create(new_task)
         return http.request.render('remake.forms_success_page', {})
     
-class PlanejamentoCampanhaMarketing(http.Controller):
-
-        
+class PlanejamentoCampanhaMarketing(http.Controller): 
     @http.route('/planejamentocampanhamarketing', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
         return http.request.render('remake.planejamentocampanhamarketing', {
@@ -238,3 +236,13 @@ class PlanejamentoCampanhaMarketing(http.Controller):
         }
         http.request.env["project.task"].sudo().create(new_task)
         return http.request.render('remake.forms_success_page', {})
+    
+
+class ControleRomaneio(http.Controller): 
+    @http.route('/romaneio', auth='public', type="http", website=True, csrf=False)
+    def index(self, **kw):
+        companyes = http.request.env['res.company'].sudo().search([])
+        return http.request.render('remake.romaneio', {
+            'companyes' : companyes,
+        })
+

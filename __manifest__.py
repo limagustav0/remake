@@ -13,6 +13,7 @@
       'templates/mala_tecnica.xml',
       'templates/fachada.xml',
       'templates/planejamento_campanha_marketing.xml',
+      'templates/romaneio.xml',
   ],
   'installable': True,
   'auto_install': False,
