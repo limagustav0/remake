@@ -245,4 +245,23 @@ class ControleRomaneio(http.Controller):
         return http.request.render('remake.romaneio', {
             'companyes' : companyes,
         })
+    
+    @http.route('/romaneio', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.controle_romaneio').id
+        description = f"""
+            Empresa: {post.get('company_name')}<br><br/>
+            Número do Romaneio: {post.get('number_romaneio')}<br><br/>
+            Data de Saída: {post.get('exit_date')}<br><br/>
+
+        """
+        new_task = {
+            'name': {post.get('company_name')},
+            'project_id': project_id,
+            'description': description,
+        }
+        http.request.env["project.task"].sudo().create(new_task)
+        return http.request.render('remake.forms_success_page', {})
+    
+    
 
