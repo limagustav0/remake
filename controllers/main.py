@@ -402,6 +402,37 @@ class LancamentoEducacionalMvp(http.Controller):
                     'res_id': new_task.id,
                 })
         return http.request.render('remake.forms_success_page')
+    
+class PromotoriaFreelancer(http.Controller):
+    @http.route('/promotoriafreelancer', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        partners = http.request.env['res.partner'].sudo().search([])
+        users = http.request.env['res.users'].sudo().search([])
+        return http.request.render('remake.promotoriafreelancer', {
+            'partners' : partners,
+            'users' : users,
+        })
+
+    # @http.route('/promotoriafreelancer', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    # def create(self, **post):
+    #     #project_id = request.env.ref('remake.digital_invite_project').id
+    #     description = f"""
+    #             Nome do vendedor:{post.get('nomeVendedor')}<br></br>
+    #             Email do vendedor:{post.get('emailVendedor')}<br></br>
+    #             Nome da Loja:{post.get('nomeLoja')}<br></br>
+    #             Código do cliente:{post.get('codCliente')}<br></br>
+    #             Data da atividade:{post.get('dataAtividade')}<br></br>
+    #             Horário do Evento:{post.get('horarioEvento')}<br></br>
+    #             Endereço completo da Loja:{post.get('enderecoLoja')}<br></br>
+    #             Tipo de atendimento:{post.get('tipoAtendimento')}<br></br>
+    #             Observações do cliente:{post.get('observacoesImportantes')}<br></br>
+    #     """
+    #     new_task = {
+    #         'name': f"{post.get('nomeVendedor')}-{post.get('nomeLoja')}-{post.get('codCliente')}",
+    #         'description': description,
+    #     }
+    #     http.request.env["project.task"].sudo().create(new_task)
+    #     return http.request.render('kami_forms.forms_success_page', {})
 
 
 
