@@ -44,4 +44,12 @@
         <field name="name">Marketing de Conteúdo.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+    <record id="remake.campanhas_mkt" model="project.project">
+        <field name="name">Calendário de Campanhas MKT.</field>
+    </record>
+  </data>
+
+
 </odoo>

@@ -434,6 +434,38 @@ class PromotoriaFreelancer(http.Controller):
     #     http.request.env["project.task"].sudo().create(new_task)
     #     return http.request.render('kami_forms.forms_success_page', {})
 
+class CampanhaMKT(http.Controller):
+    @http.route('/campanhamkt', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        return http.request.render('remake.campanhamkt')
+    
+    @http.route('/campanhamkt', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.campanhas_mkt').id
+        description = f""""
+                <strong>Empresa:</strong> {post.get('empresa')}<br></br>
+                <strong>Ano:</strong> {post.get('ano')}<br></br>
+                <strong>Periodo:</strong> {post.get('trimestre')}<br></br>
+                <strong>Início:</strong> {post.get('data_inicio')}<br></br>
+                <strong>Vencimento do Planejamento:</strong> {post.get('data_vencimento')}<br></br>
+                <strong>Tipos de Campanha:</strong><br></br>
+                                   {post.get('lancamento') if post.get('lancamento') else " "}<br></br>
+                                   {post.get('branding') if post.get('lancamento') else " "}<br></br>
+                                   {post.get('comercial') if post.get('lancamento') else " "}<br></br>
+                                   {post.get('fluxo') if post.get('lancamento') else " "}<br></br>
+                                   {post.get('encantamento') if post.get('lancamento') else " "}<br></br>
+                                   {post.get('reativacao') if post.get('lancamento') else " "}<br></br>
+
+        """
+        new_task = {
+            'name': 'Definir nome',
+            'project_id': project_id,
+            'description': description,
+        }
+
+        new_task = http.request.env["project.task"].sudo().create(new_task)
+        return http.request.render('remake.forms_success_page')
+
 
 
 

@@ -18,6 +18,7 @@
       'templates/criativo.xml',
       'templates/educacional_mvp.xml',
       'templates/promotoria_freelancer.xml',
+      'templates/campanha_mkt.xml',
   ],
   'installable': True,
   'auto_install': False,
