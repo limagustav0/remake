@@ -51,5 +51,9 @@
     </record>
   </data>
 
-
+  <data noupdate="1">
+    <record id="remake.solicitacao_redes_sociais" model="project.project">
+        <field name="name">Solicitação para Redes Sociais.</field>
+    </record>
+  </data>
 </odoo>

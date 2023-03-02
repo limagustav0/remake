@@ -378,7 +378,7 @@ class LancamentoEducacionalMvp(http.Controller):
     @http.route('/educacionalmvp', auth='public', type="http", website=True, methods=['post'], csrf=False)
     def create(self, **post):
         project_id = request.env.ref('remake.lancamento_educacional_mvp').id
-        description = f""""
+        description = f"""
                 Atividade:{post.get('atividade')}<br></br>
                 Descrição da atividade:{post.get('descricaoAtividade')}<br></br>
                 Data preferida para entrega:{post.get('dataEntrega')}<br></br>
@@ -442,7 +442,7 @@ class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', type="http", website=True, methods=['post'], csrf=False)
     def create(self, **post):
         project_id = request.env.ref('remake.campanhas_mkt').id
-        description = f""""
+        description = f"""
                 <strong>Empresa:</strong> {post.get('empresa')}<br></br>
                 <strong>Ano:</strong> {post.get('ano')}<br></br>
                 <strong>Periodo:</strong> {post.get('trimestre')}<br></br>
@@ -465,6 +465,72 @@ class CampanhaMKT(http.Controller):
 
         new_task = http.request.env["project.task"].sudo().create(new_task)
         return http.request.render('remake.forms_success_page')
+    
+class SolicitacaoRedeSocial(http.Controller):
+    @http.route('/solicitacaoredesocial', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        return http.request.render('remake.solicitacaoredesocial')
+    
+    @http.route('/solicitacaoredesocial', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.solicitacao_redes_sociais').id
+        description = f"""
+                <strong>Assunto:</strong> {post.get('subject')}<br></br>
+                <strong>Onde será publicado?:</strong> {post.get('publi')}<br></br>
+                <strong>Briefing:</strong> {post.get('briefing')}<br></br>
+                <strong>Legenda:</strong> {post.get('legenda')}<br></br>
+                <strong>Data da Publicação:</strong> {post.get('pud_date')}<br></br>
+        """
+        new_task = {
+            'name': 'Definir nome',
+            'project_id': project_id,
+            'description': description,
+        }
+
+        new_task = http.request.env["project.task"].sudo().create(new_task)
+        if 'aditional_archives_reference' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives_reference')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': "REFERÊNCIAS" + attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task', 
+                    'res_id': new_task.id,
+                })
+        
+        if 'aditional_archives_story' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives_story')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': "STORY" + attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+
+
+        if 'aditional_archives_layout' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives_layout')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': "LAYOUT" + attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task', 
+                    'res_id': new_task.id,
+                })
+
+        if 'aditional_archives_story' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('aditional_archives_story')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': "STORY" + attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',  
+                    'res_id': new_task.id,
+                })
+        return http.request.render('remake.forms_success_page')
+    
+
 
 
 
