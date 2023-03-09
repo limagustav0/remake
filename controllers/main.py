@@ -432,7 +432,7 @@ class PromotoriaFreelancer(http.Controller):
     #         'description': description,
     #     }
     #     http.request.env["project.task"].sudo().create(new_task)
-    #     return http.request.render('kami_forms.forms_success_page', {})
+    #     return http.request.render('remake.forms_success_page', {})
 
 class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', csrf=False, website=True)    
@@ -530,8 +530,65 @@ class SolicitacaoRedeSocial(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
     
+class SolictacaoRh(http.Controller):
+    @http.route('/solicitacaorh', auth='public', csrf=False, website=True)
+    def index(self, **kw):
+        users = http.request.env['res.users']
+        return http.request.render('remake.formulario_rh', {
+            'users': users.sudo().search([])
+        })
 
-
-
-
-
+    @http.route('/solicitacaorh', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.solicitacao_rh_project').id
+        description = f"""
+                NOME COMPLETO: {post.get('nomeCompleto')}<br></br>
+                NOME SOCIAL: {post.get('nomeSocial')}<br></br>
+                CNPJ: {post.get('cnpj')}<br></br>
+                NOME PAI: {post.get('nomePai')}<br></br>
+                NOME MÃE: {post.get('nomeMae')}<br></br>
+                DATA NASCIMENTO: {post.get('dataNascimento')}<br></br>
+                MUNICIPIO DE NASCIMENTO: {post.get('municipioNascimeno')}<br></br>
+                UF: {post.get('uf')}<br></br>
+                PAÍS DE NASCIMENTO: {post.get('paisNascimento')}<br></br>
+                GÊNERO: {post.get('genero')}<br></br>
+                ESTADO CIVIL: {post.get('estadoCivil')}<br></br>
+                ENDEREÇO RESIDENCIAL: {post.get('enderecoResidencial')}<br></br>
+                BAIRRO: {post.get('bairro')}<br></br>
+                CEP: {post.get('cep')}<br></br>
+                ESTADO: {post.get('estado')}<br></br>
+                EMAIL PESSOAL: {post.get('emailPessoal')}<br></br>
+                TAMANHO DA ROUPA: {post.get('tamanhoRoupa')}<br></br>
+                TAMANHO DO SAPATO: {post.get('tamanhoSapato')}<br></br>
+                BANCO: {post.get('banco')}<br></br>
+                AGÊNCIA: {post.get('agencia')}<br></br>
+                NÚMERO DA CONTA: {post.get('numeroConta')}<br></br>
+                TIPO DE CONTA: {post.get('tipoConta')}<br></br>
+                PIX: {post.get('pix')}<br></br>
+                NÚMERO DO RG: {post.get('numeroRg')}<br></br>
+                ORGÃO EMISSOR: {post.get('orgaoEmissor')}<br></br>
+                DATA DA EXPEDIÇÃO: {post.get('dataExpedicao')}<br></br>
+                NUMERO DO CPF: {post.get('numeroCpf')}<br></br>
+                PERIODO DA PRESTAÇÃO DE SERVIÇO (DATA INICIO): {post.get('prestacaoServicoInicio')}<br></br>
+                PERIODO DA PRESTAÇÃO DE SERVIÇO (DATA FINAL): {post.get('prestacaoServicoFim')}<br></br>
+                FUNÇÃO: {post.get('funcao')}<br></br>
+                VALOR DO PAGAMENTO: {post.get('valorPagamento')}<br></br>
+                AJUDA DE CUSTO: {post.get('ajudaCusto')}<br></br>
+                OUTROS: {post.get('outros')}<br></br>
+        """
+        task_vals = {
+            'name': f"{post.get('nomeCompleto')}-{post.get('funcao')}",
+            'project_id': project_id,
+            'description': description,
+        }
+        new_task = request.env["project.task"].sudo().create(task_vals)
+        if 'anexo'  in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('anexo')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+        return http.request.render('remake.forms_success_page')
