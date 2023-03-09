@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="remake.lancamento_educacional_mvp_project" model="project.project">
+            <field name="name">Lançamento Educacional MVP</field>
+        </record>
+    </data>
+</odoo>

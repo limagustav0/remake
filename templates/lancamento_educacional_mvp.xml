@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="remake.lancamentoeducacionalmvp">
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img
+                            class="img-thumbnail rounded float-left"
+                            t-attf-src='remake/static/description/icon.png'
+                            style="height: 270px; width: 270px;"
+                        />
+                        <h3>Marketing de Conteúdo
+                        </h3>
+                        <p>
+                            <i>
+                                Adicione solicitações ao time de Marketing de Conteúdo.
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form class="col-md-6" t-attf-action="/lancamentoeducacionalmvp"
+                            method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label style='display:block'>Atividade:</label>
+                                <input required='True' type='text' name='atividade' />
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Descrição da atividade</label>
+                                <textarea required='True' id="descricaoAtividade"
+                                    name="descricaoAtividade" rows="4" cols="50">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Data preferida para entrega</label>
+                                <input required='True' type='date' name='dataEntrega'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Prioridade:</label>
+                                <select required='True' name='prioridade' id=''>
+                                    <option value='null'>Escolha uma opção</option>
+                                    <option value='Alta'>Alta</option>
+                                    <option value='Média'>Média</option>
+                                    <option value='Baixa'>Baixa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Anexo</label>
+                                <input type='file' name='anexo' multiple='true'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Responsável pela atividade</label>
+                                <select name="responsavelAtividade">
+                                    <option required='True' value='null'>Selecione uma opção</option>
+                                    <t t-foreach="users" t-as="user">
+                                        <option t-att-value="user.id" t-esc="user.name" />
+                                    </t>
+                                </select>
+                            </div>
+                            <input type="submit" value="Enviar" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

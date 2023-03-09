@@ -6,7 +6,7 @@
   'license': 'GPL-3 or any later version',
   'depends': ['base', 'project', 'website','web','kami_sm'],
   'data': [
-      
+      'data/project_data.xml',
       'templates/forms_success_page.xml',
       'templates/audiovisual.xml',
       'templates/project_data.xml',
@@ -20,6 +20,7 @@
       'templates/promotoria_freelancer.xml',
       'templates/campanha_mkt.xml',
       'templates/solicitacao_redes_sociais.xml',
+      'templates/lancamento_educacional_mvp.xml',
   ],
   'installable': True,
   'auto_install': False,
