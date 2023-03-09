@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="remake.marketing_conteudo">
+    <title>Formulário - Marketing de conteúdo</title>
+    <t t-call="website.layout">
+      <div class="mt-5 mb-5 container">
+        <div class="row">
+          <div class="col-sm-4">
+            <img
+              class="img-thumbnail rounded float-left"
+              t-attf-src='remake/static/description/icon.png'
+              style="height: 270px; width: 270px;"
+            />
+            <h3>Solicitação para Redes Sociais</h3>
+            <p>
+              <i>
+                Adicione solicitações ao time de Marketing de Conteúdo.
+              </i>
+            </p>
+          </div>
+          <div class="col-sm-8">
+            <form
+              t-attf-action="/marketingcontent"
+              method="post"
+              enctype="multipart/form-data">
+              <div class="form-group">
+                <label style='display:block'>Assunto: </label>
+                <input required='True' type='text' name='subject'></input>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>Onde será publicado?</label>
+                <input required='True' type='radio' name='placeOfPublication'
+                  value='@trusshair.kamico'></input>
+                <label for='@trusshair.kamico'>@trusshair.kamico</label>
+                <input required='True' type='radio' name='placeOfPublication' value='@trussportugal'></input>
+                <label for='@trussportugal'>@trussportugal</label>
+                <input required='True' type='radio' name='placeOfPublication' value='YouTube'></input>
+                <label for='YouTube'>YouTube</label>
+                <input required='True' type='radio' name='placeOfPublication' value='Workplace'></input>
+                <label for='Workplace'>Workplace</label>
+                <input required='True' type='radio' name='placeOfPublication' value='LinkedIn'></input>
+                <label for='LinkedIn'>LinkedIn</label>
+                <input required='True' type='radio' name='placeOfPublication'
+                  value='@kamiforbusiness'></input>
+                <label for='@kamiforbusiness'>@kamiforbusiness</label>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>Briefing: </label>
+                <textarea rols='60' cols='70' name='briefing' style='display: block'></textarea>
+              </div>
+              <div class="form-group">
+                <label style='display:block'>Referências: </label>
+                <p>
+                  <i>Coloque referências como: prints, imagens, etc.</i>
+                </p>
+                <input type='file' name='anexo' multiple='True'></input>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>labela: </label>
+                <textarea rols='60' cols='70' name='subtitle'></textarea>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>Imagem Tratada ou com Layout - FEED: </label>
+                <p>
+                  <i>Publicar post com este anexo</i>
+                </p>
+                <input type='file' name='anexo' multiple='True'></input>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>Imagem para STORY: </label>
+                <input type='file' name='anexo' multiple='True'></input>
+              </div>
+              <div class="form-group">
+                <label style='display: block'>Data da Publicação</label>
+                <input type='date' name='publicationDate'></input>
+              </div>
+              <input class="btn btn-primary" type="submit" value="Enviar" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="remake.marketing_conteudo_project" model="project.project">
+            <field name="name">Marketing de Conteúdo</field>
+        </record>
+    </data>
+</odoo>
