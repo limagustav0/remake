@@ -432,7 +432,7 @@ class PromotoriaFreelancer(http.Controller):
     #         'description': description,
     #     }
     #     http.request.env["project.task"].sudo().create(new_task)
-    #     return http.request.render('kami_forms.forms_success_page', {})
+    #     return http.request.render('remake.forms_success_page', {})
 
 class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', csrf=False, website=True)    
@@ -530,8 +530,41 @@ class SolicitacaoRedeSocial(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
     
+class EducacionalContent(http.Controller):
+    @http.route('/educacionalcontent', auth='public', csrf=False, website='True')
+    def index(self, **kw):
+        return http.request.render('remake.educacionalcontent', {
+        })
 
+    @http.route('/educacionalcontent', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref("remake.educacional_content_project").id
+        description = f"""
+                Capa (HEADLINE):{post.get('capaHeadline')}<br></br>
+                Onde será publicado:{post.get('pulicacao')}<br></br>
+                Formato:{post.get('formato')}<br></br>
+                Selo:{post.get('selo')}<br></br>
+                Referências:{post.get('referencia')}<br></br>
+                Briefing Tema:{post.get('briefingTema')}<br></br>
+                Legenda:{post.get('legenda')}<br></br>
+                Briefing do Criativo:{post.get('briefingCriativo')}<br></br>
+                Data da Publicação:{post.get('dataPublicacao')}<br></br>
+        """
+        task_vals = {
+            'name': f"{post.get('capaHeadline')}-{post.get('pulicacao')}",
+            'project_id': project_id,
+            'description': description,
+        }
 
+        new_task = request.env["project.task"].sudo().create(task_vals)
 
-
-
+        if 'task_attachment'  in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('task_attachment')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
+                })
+            return http.request.render('remake.forms_success_page')
