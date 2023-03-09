@@ -432,7 +432,7 @@ class PromotoriaFreelancer(http.Controller):
     #         'description': description,
     #     }
     #     http.request.env["project.task"].sudo().create(new_task)
-    #     return http.request.render('kami_forms.forms_success_page', {})
+    #     return http.request.render('remake.forms_success_page', {})
 
 class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', csrf=False, website=True)    
@@ -530,8 +530,37 @@ class SolicitacaoRedeSocial(http.Controller):
                 })
         return http.request.render('remake.forms_success_page')
     
+class PagamentoVilaLobos(http.Controller):
+    @http.route('/pagamentovilalobos', type='http', auth='public', website=True, csrf=False, methods=['GET'])
+    def index(self, **kw):
+        users = http.request.env['res.users']
+        return http.request.render('remake.pagamentos_vila_lobos', {
+            'users': users.sudo().search([])
+        })
 
+    @http.route('/pagamentovilalobos', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.pagamentos_vila_lobos_project').id
+        description = f"""
+            Empresa: {post.get('empresa')}<br></br>
+            Numero da nota: {post.get('numeroNota')}<br></br>
+            Valor da nota: {post.get('valorNota')}<br></br>     
+        """
+        new_vals = {
+            'name': f"{post.get('empresa')}-{post.get('numeroNota')}",
+            'project_id': project_id,
+            'description': description,
+        }
 
+        new_task =  http.request.env["project.task"].sudo().create(new_vals)
+        if 'anexo' in http.request.params:
+            attached_files = http.request.httprequest.files.getlist('anexo')
+            for attachment in attached_files:
+                http.request.env['ir.attachment'].sudo().create({
+                    'name': attachment.filename,
+                    'datas': base64.b64encode(attachment.read()),
+                    'res_model': 'project.task',
+                    'res_id': new_task.id,
 
-
-
+                })
+        return http.request.render('remake.forms_success_page')
