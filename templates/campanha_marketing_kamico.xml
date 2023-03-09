@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="remake.campanhamarketingkamico">
+        <title>Formulário - Campanhas de Marketing KAMI CO.</title>
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img
+                            class="img-thumbnail rounded float-left"
+                            t-attf-src='remake/static/description/icon.png'
+                            style="height: 270px; width: 270px;"
+                        />
+                        <h3>Campanhas de Marketing KAMI CO.</h3>
+                        <p>
+                            <i>
+                                Preencha o formulário para enviar uma solicitação de
+                                campanha/oportunidade de MARKETING a ser aprovado e planejado.
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form class="col-md-6" t-attf-action="/campanhamarketingkamico" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label style='display:block'>Selecione o perfil de cliente:</label>
+                                <input type='radio'
+                                    id='Salão'
+                                    name='perfilCliente'
+                                    value='Salão'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifPerfumaria').style.display = 'none';
+                                document.getElementById('ifSalao').style.display = 'block';
+                            }"
+                                />
+                                <label for='Salão'>Salão
+                                </label>
+                                <input type='radio'
+                                    id='Loja/Perfumaria'
+                                    name='perfilCliente'
+                                    value='Loja/Perfumaria'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifPerfumaria').style.display = 'block';
+                                document.getElementById('ifSalao').style.display = 'none';
+                            }" />
+                                <label for='Loja/Perfumaria'>Loja/Perfumaria
+                                </label>
+                                <div class="form-group">
+                                    <p style='display: none'
+                                        id='ifSalao'>
+                                        LEMBRETE: Evento de SALÃO será aprovado mediante acordo
+                                        comercial</p>
+                                    <p style='display: none'
+                                        id='ifPerfumaria'>
+                                        LEMBRETE: Evento de PERFUMARIA será aprovado mediante
+                                        critério comercial de pedido no valor de no mínimo
+                                        R$7000,00/mês.</p>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Nome do Salão ou Loja</label>
+                                <input type='text' name='nomeSalaoLoja'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Código do cliente no UNO:</label>
+                                <input type='text' name='codClienteUno'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Nome do Vendedor</label>
+                                <input type='text' name='nomeVendedor'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Selecione o responsável BackOffice por
+                                    sua região:</label>
+                                <select name="responsavelBackOffce">
+                                    <option value='null'>Selecione uma opção</option>
+                                    <t t-foreach="users" t-as="user">
+                                        <option t-att-value="user.id" t-esc="user.name" />
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Códido do último pedido no UNO</label>
+                                <input type='text' name='codUltimoPedidoUno'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Qual valor do último pedido? (Líquido)</label>
+                                <input type="number" step="0.01" min="0" name='valorUltimoPedidoUno'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Endereço completo do Salão/Loja</label>
+                                <input type='text' name='objetivoAcaoComercial'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Configuração da ação</label>
+                    <input
+                                    type="checkbox"
+                                    name="configuracaoAcao"
+                                    value="Degustação"
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDiaDaBeleza').style.display = 'block';
+                            }" />
+                                Degustação<br />
+                    <input
+                                    type="checkbox"
+                                    name="configuracaoAcao"
+                                    value="Degustação com Promotor"
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDiaDaBeleza').style.display = 'block';
+                            }" />
+                                Degustação com Promotor<br />
+                    <input
+                                    type="checkbox"
+                                    name="configuracaoAcao"
+                                    value="Degustação com Dia da Beleza | APENAS SALÕES"
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDiaDaBeleza').style.display = 'block';
+                            }" />
+                                Degustação com Dia da Beleza | APENAS SALÕES<br />
+                    <input
+                                    type="checkbox"
+                                    name="configuracaoAcao"
+                                    value="Degustação com Promotor + Dia da Beleza | APENAS SALÕES"
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDiaDaBeleza').style.display = 'block';
+                            }" />
+                                Degustação com Promotor + Dia da Beleza | APENAS SALÕES<br />
+                    <input
+                                    type="checkbox"
+                                    name="configuracaoAcao"
+                                    value="Dia da Beleza | APENAS SALÕES"
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDiaDaBeleza').style.display = 'none';
+                            }" />
+                                Dia da Beleza | APENAS SALÕES<br />
+                            </div>
+                            <div id='ifDiaDaBeleza'>
+                                <label style='display:block'>Tipo de Evento</label>
+                                <select name='tipoEvento'>
+                                    <option value=''>Escolha uma opção</option>
+                                    <option value='TRUSS EXPERIENCE'>TRUSS EXPERIENCE</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Selecione o estado da sua região:</label>
+                                <input
+                                    type='radio'
+                                    name='regiao'
+                                    value='São Paulo'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDegustacaoRS').style.display = 'none';
+                                document.getElementById('ifDegustacaoSP').style.display = 'block';
+                                document.getElementById('ifDegustacaoRJ').style.display = 'none';
+                            }">São
+                                    Paulo</input>
+                                <input
+                                    type='radio'
+                                    name='regiao'
+                                    value='Rio Grande do Sul'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDegustacaoRS').style.display = 'block';
+                                document.getElementById('ifDegustacaoSP').style.display = 'none';
+                                document.getElementById('ifDegustacaoRJ').style.display = 'none';
+                            }">Rio
+                                    Grande do Sul</input>
+                                <input
+                                    type='radio'
+                                    name='regiao'
+                                    value='Rio de Janeiro'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifDegustacaoRS').style.display = 'none';
+                                document.getElementById('ifDegustacaoSP').style.display = 'none';
+                                document.getElementById('ifDegustacaoRJ').style.display = 'block';
+                            }">Rio
+                                    de Janeiro</input>
+
+                                <div style='display: none' id='ifDegustacaoRS'>
+                                    <label style='display:block'>Degustação RS</label>
+                                    <select name='degustacaoPorEstado'>
+                                        <option value=''>Escolha uma opção</option>
+                                        <option value='Barman'>Barman</option>
+                                    </select>
+                                </div>
+
+                                <div style='display: none' id='ifDegustacaoSP'>
+                                    <label style='display:block'>Degustação SP</label>
+                                    <select name="degustacaoPorEstado">
+                                        <option value="">Escolha uma opção</option>
+                                        <option value="Barman">Barman</option>
+                                        <option value="Bike de brigadeiro">Bike de brigadeiro</option>
+                                        <option value="Tacho de brigadeiro [MAFOZ]">Tacho de
+                                            brigadeiro [MAFOZ]</option>
+                                        <option value="Pipoca [MAFOZ]">Pipoca [MAFOZ]</option>
+                                        <option value="Algodão doce [MAFOZ]">Algodão doce [MAFOZ]</option>
+                                        <option value="Mini quiche [MAFOZ]">Mini quiche [MAFOZ]</option>
+                                        <option value="Bala de pão de mel [MAFOZ]">Bala de pão de
+                                            mel [MAFOZ]</option>
+                                        <option
+                                            value="Sorvete (massa) [MAFOZ] *Necessário freezer no local">Sorvete
+                                            (massa) [MAFOZ] *Necessário freezer no local</option>
+                                        <option value="Sorvete de palito [MAFOZ]">Sorvete de palito
+                                            [MAFOZ]</option>
+                                        <option value="Salada de frutas [MAFOZ]">Salada de frutas
+                                            [MAFOZ]</option>
+                                        <option value="Palito de Frutas [MAFOZ]">Palito de Frutas
+                                            [MAFOZ]</option>
+                                        <option value="Açaí no copo [MAFOZ]">Açaí no copo [MAFOZ]</option>
+                                        <option value="Churros">Churros</option>
+                                        <option value="Truss Santé (Somente espumante)">Truss Santé
+                                            (Somente espumante)</option>
+                                    </select>
+                                </div>
+
+                                <div style='display: none' id='ifDegustacaoRJ'>
+                                    <label style='display:block'>Degustação RJ</label>
+                                    <select name="degustacaoPorEstado">
+                                        <option value="">Escolha uma opção</option>
+                                        <option value="Brigadeiro de colher">Brigadeiro de colher</option>
+                                        <option value="Brigadeiro confeitado">Brigadeiro confeitado</option>
+                                        <option value="Palha italiana">Palha italiana</option>
+                                        <option value="Macarons em torre">Macarons em torre</option>
+                                        <option value="Pipoca Gourmet">Pipoca Gourmet</option>
+                                        <option value="Carrinho Gourmet fit - Doces Lowcarb">Carrinho
+                                            Gourmet fit - Doces Lowcarb</option>
+                                        <option value="Barman">Barman</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Sugestão de data para o evento:</label>
+                                <ul>
+                                    <li>Somente SEXTAS E SÁBADOS!</li>
+                                    <li>Pré agendar com no mínimo 15 dias de antecedência</li>
+                                    <li>A data sugerida não garante que o evento está confirmado.
+                                        Aguarde confirmação via e-mail =)</li>
+                                </ul>
+                                <input type='date' name='sugestaoDataEvento'></input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Qual o porte do evento?</label>
+                                <input type='radio' name='porteEvento' value='80 pessoas'>80 pessoas</input>
+                                <input type='radio' name='porteEvento' value='150 pessoas'>150
+                                    pessoas</input>
+                                <input type='radio' name='porteEvento' value='200 pessoas'>200
+                                    pessoas</input>
+                            </div>
+                            <div class="form-group">
+                                <br></br>
+                                <label style='display:block'>O espaço do cliente comporta uma
+                                    estrutura de no mínimo 1,20cm de largura?</label>
+                                <p>Isso auxiliará o fornecedor e evitará qualquer tipo de problema
+                                    na montagem por falta de espaço.</p>
+                                <p><strong>IMPORTANTE:</strong> Sinalizar na observação se precisar
+                                    de uma estrtutura menor para verificarmos disponibilidade com o
+                                    fornecedor.</p>
+                                <input type='radio' name='comportamentoEstrutura' value='Sim'>Sim</input>
+                                <input type='radio' name='comportamentoEstrutura' value='Não'>Não</input>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>(Opcional) Observação sobre o local
+                                    para montagem do evento:</label>
+                                <textarea name='observacaoLocalEvento' rows='7' cols='30'></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Horário do Evento</label>
+                                <input
+                                    type='radio'
+                                    name='horarioEvento'
+                                    value='12h às 18h'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutroHorario').style.display = 'none';
+                            }">12h
+                                    às 18h</input>
+                                <input
+                                    type='radio'
+                                    name='horarioEvento'
+                                    value='13h às 19h'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutroHorario').style.display = 'none';
+                            }">13h
+                                    às 19h</input>
+                                <input
+                                    type='radio'
+                                    name='horarioEvento'
+                                    value='Outro'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifOutroHorario').style.display = 'block';
+                            }">
+                                    Outro</input>
+
+                                <div style='display: none' id='ifOutroHorario'>
+                                    <label style='display:block'>Qual novo horário?</label>
+                                    <input type='text' name='outroHorario'></input>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Observação</label>
+                                <p>Exemplo: Informe aqui se é um evento normal... inauguração...
+                                    aniversário do salão... se é uma venda centralizada (em caso de
+                                    perfumaria)... se terá um fluxo alto de clientes. Essa é a hora
+                                    de já alinhar com o time interno da KAMI CO. qual a necessidade
+                                    do evento.</p>
+                                <textarea name='observacao' rows='7' cols='30'></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label style='display:block'>Precisa que seja desenvolvido CONVITE
+                                    DIGITAL?</label>
+                                <input
+                                    type='radio'
+                                    name='conviteDigital'
+                                    value='Sim'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifConviteDigital').style.display = 'block';
+                            }">
+                                    Sim</input>
+                                <input
+                                    type='radio'
+                                    name='conviteDigital'
+                                    value='Não'
+                                    t-attf-onchange="
+                            if (this.checked) {
+                                document.getElementById('ifConviteDigital').style.display = 'none';
+                            }">
+                                    Não</input>
+
+                                <div style='display: none' id='ifConviteDigital'>
+                                    <div class="form-group">
+                                        <label style='display:block'>Se sim, descreva aqui somente a
+                                            proposta comercial OU chamada especial (se houver):</label>
+                                        <p>Exemplo 1: Na compra de Uso OBrigatório Ganhe Tratamento
+                                            TRUSS</p>
+                                        <p>Exemplo 2: Venha participar da grande Inauguração do
+                                            espaço</p>
+                                        <p>ALÉM DA PROPOSTA, TODOS OS CONVITES SÃO PADRÃO E CONTÉM
+                                            OS SEGUINTES DADOS:</p>
+                                        <ul>
+                                            <li>Logo do cliente</li>
+                                            <li>Data do evento</li>
+                                            <li>Endereço</li>
+                                            <li>Frase de efeito: "Neste dia teremos coquetel
+                                                especial!"</li>
+                                        </ul>
+                                        <textarea name='descricaoConvite' rows='7' cols='30'></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style='display:block'>Anexe aqui o logo do salão ou
+                                            loja:</label>
+                                        <input type='file' name='logoSalao'></input>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label style='display:block'>Escolha a imagem para o convite</label>
+                                        <div class="form-group">
+                                            <input type='radio' name='imagemParaConvite' value='1'>1</input>
+                                            <input type='radio' name='imagemParaConvite' value='2'>2</input>
+                                            <input type='radio' name='imagemParaConvite' value='3'>3</input>
+                                            <input type='radio' name='imagemParaConvite' value='4'>4</input>
+                                            <input type='radio' name='imagemParaConvite' value='5'>5</input>
+                                            <input type='radio' name='imagemParaConvite' value='6'>6</input>
+                                            <input type='radio' name='imagemParaConvite' value='7'>7</input>
+                                            <input type='radio' name='imagemParaConvite' value='8'>8</input>
+                                            <input type='radio' name='imagemParaConvite' value='9'>9</input>
+                                            <input type='radio' name='imagemParaConvite' value='10'>
+                                                10</input>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type='radio' name='imagemParaConvite' value='11'>
+                                                11</input>
+                                            <input type='radio' name='imagemParaConvite' value='12'>
+                                                12</input>
+                                            <input type='radio' name='imagemParaConvite' value='13'>
+                                                13</input>
+                                            <input type='radio' name='imagemParaConvite' value='14'>
+                                                14</input>
+                                            <input type='radio' name='imagemParaConvite' value='15'>
+                                                15</input>
+                                            <input type='radio' name='imagemParaConvite' value='16'>
+                                                16</input>
+                                            <input type='radio' name='imagemParaConvite' value='17'>
+                                                17</input>
+                                            <input type='radio' name='imagemParaConvite' value='18'>
+                                                18</input>
+                                            <input type='radio' name='imagemParaConvite' value='19'>
+                                                19</input>
+                                            <input type='radio' name='imagemParaConvite' value='20'>
+                                                20</input>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type='radio' name='imagemParaConvite' value='21'>
+                                                21</input>
+                                            <input type='radio' name='imagemParaConvite' value='22'>
+                                                22</input>
+                                            <input type='radio' name='imagemParaConvite' value='23'>
+                                                23</input>
+                                            <input type='radio' name='imagemParaConvite' value='24'>
+                                                24</input>
+                                            <input type='radio' name='imagemParaConvite' value='25'>
+                                                25</input>
+                                            <input type='radio' name='imagemParaConvite' value='26'>
+                                                26</input>
+                                            <input type='radio' name='imagemParaConvite' value='27'>
+                                                27</input>
+                                            <input type='radio' name='imagemParaConvite' value='28'>
+                                                28</input>
+                                            <input type='radio' name='imagemParaConvite' value='29'>
+                                                29</input>
+                                            <input type='radio' name='imagemParaConvite' value='30'>
+                                                30</input>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type='radio' name='imagemParaConvite' value='41'>
+                                                41</input>
+                                            <input type='radio' name='imagemParaConvite' value='42'>
+                                                42</input>
+                                            <input type='radio' name='imagemParaConvite' value='43'>
+                                                43</input>
+                                            <input type='radio' name='imagemParaConvite' value='44'>
+                                                44</input>
+                                            <input type='radio' name='imagemParaConvite' value='45'>
+                                                45</input>
+                                            <input type='radio' name='imagemParaConvite' value='46'>
+                                                46</input>
+                                            <input type='radio' name='imagemParaConvite' value='47'>
+                                                47</input>
+                                            <input type='radio' name='imagemParaConvite' value='48'>
+                                                48</input>
+                                            <input type='radio' name='imagemParaConvite' value='49'>
+                                                49</input>
+                                            <input type='radio' name='imagemParaConvite' value='40'>
+                                                40</input>
+                                            <input type='radio' name='imagemParaConvite' value='40'>
+                                                40</input>
+                                            <input type='radio' name='imagemParaConvite' value='41'>
+                                                41</input>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style='display:block'>Digite o número do seu WhatsApp
+                                            para receber o arquivo:</label>
+                                        <input type='tel' name='numeroWHatsapp'></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Enviar" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

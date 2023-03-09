@@ -432,7 +432,7 @@ class PromotoriaFreelancer(http.Controller):
     #         'description': description,
     #     }
     #     http.request.env["project.task"].sudo().create(new_task)
-    #     return http.request.render('kami_forms.forms_success_page', {})
+    #     return http.request.render('remake.forms_success_page', {})
 
 class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', csrf=False, website=True)    
@@ -531,7 +531,50 @@ class SolicitacaoRedeSocial(http.Controller):
         return http.request.render('remake.forms_success_page')
     
 
+class CampanhaMarketingKamiCo(http.Controller):
+    @http.route('/campanhamarketingkamico', auth='public', csrf=False, website='True')
+    def index(self, **kw): 
+         users = http.request.env['res.users']
+         return http.request.render('remake.campanhamarketingkamico', {
+             'users': users.search([])
+         })
 
+    @http.route('/campanhamarketingkamico', auth='public', type="http", website=True, methods=['post'], csrf=False)
+    def create(self, **post):
+        project_id = request.env.ref('remake.digital_invite_project').id
+        description = f"""
+                Perfil do cliente:{post.get('perfilCliente')} <br></br>
+                Nome do Salão ou Loja:{post.get('nomeSalaoLoja')}<br></br>
+                Código do cliente no UNO::{post.get('codClienteUno')}<br></br>
+                Nome do Vendedor:{post.get('nomeVendedor')}<br></br>
+                responsável BackOffice:{post.get('responsavelBackOffce')}<br></br>
+                Códido do último pedido no UNO:{post.get('codUltimoPedidoUno')}<br></br>
+                Valor do último pedido (Liquido):{post.get('valorUltimoPedidoUno')}<br></br>
+                Objetivo dessa ação comercial:{post.get('objetivoAcaoComercial')}<br></br>
+                Endereço completo do Salão/Loja:{post.get('enderecoCompletoSalaoLoja')}<br></br>
+                Configuração da ação:{post.get('configuracaoAcao')} -- Estado da região:{post.get('estadoRegiao')}<br></br>
+                Tipo de Evento:{post.get('tipoEvento')}<br></br>
+                Região:{post.get('regiao')} -- Degustação:{post.get('degustacaoPorEstado')}<br></br>
+                Sugestão de data para o evento:{post.get('sugestaoDataEvento')}<br></br>
+                Porte do evento:{post.get('porteEvento')}<br></br>
+                O espaço do cliente comporta uma estrutura de no mínimo 1,20cm de largura?{post.get('comportamentoEstrutura')}<br></br>
+                (Opcional) Observação sobre o local para montagem do evento:{post.get('observacaoLocalEvento')}<br></br>
+                Horário do Evento:{post.get('horarioEvento')} -- Se necessario outro horarario: {post.get('outroHorario')}<br></br>
+                Observação:{post.get('observacao')}<br></br>
+                Precisa que seja desenvolvido CONVITE DIGITAL?{post.get('conviteDigital')}<br></br>
+                <br></br>
+                As informações a seguir são preenchidas apenas se a opção Convite digital for selecionada.<br></br>
+                <br></br>
+                Descrição do convite:{post.get('descricaoConvite')}<br></br>
+                Imagem para o convite:{post.get('imagemParaConvite')}<br></br>
+                Numero do Whatsapp:{post.get('numeroWHatsapp')}<br></br>
+        """
+        new_task = {
+            'name': f"{post.get('departamento')}-{post.get('solicitacao')}",
+            'user_id': (post.get('responsavelBackOffce')),
+            'project_id': project_id,
+            'description': description,
+        }
 
-
-
+        http.request.env["project.task"].sudo().create(new_task)
+        return http.request.render('remake.forms_success_page', {})
