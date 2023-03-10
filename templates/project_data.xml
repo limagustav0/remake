@@ -62,4 +62,10 @@
         <field name="name">Cursos KAMI CO.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+    <record id="remake.solicitacao_rh_project" model="project.project">
+        <field name="name">Formulário RH.</field>
+    </record>
+  </data>
 </odoo>
