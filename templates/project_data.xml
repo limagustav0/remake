@@ -56,4 +56,10 @@
         <field name="name">Solicitação para Redes Sociais.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+    <record id="remake.cursos_kamico_project" model="project.project">
+        <field name="name">Cursos KAMI CO.</field>
+    </record>
+  </data>
 </odoo>

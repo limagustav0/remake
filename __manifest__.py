@@ -6,7 +6,7 @@
   'license': 'GPL-3 or any later version',
   'depends': ['base', 'project', 'website','web','kami_sm'],
   'data': [
-      'data/project_data.xml',
+      'templates/project_data.xml',
       'templates/forms_success_page.xml',
       'templates/audiovisual.xml',
       'templates/project_data.xml',

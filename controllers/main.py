@@ -529,7 +529,6 @@ class SolicitacaoRedeSocial(http.Controller):
                     'res_id': new_task.id,
                 })
         return http.request.render('remake.forms_success_page')
-    
 
 class CursosKamico(http.Controller):
     @http.route('/cursoskamico', auth='public', csrf=False, website='True')
@@ -573,4 +572,4 @@ class CursosKamico(http.Controller):
                     'res_id': new_task.id,
 
                 })
-            return http.request.render('remake.forms_success_page')
+        return http.request.render('remake.forms_success_page')

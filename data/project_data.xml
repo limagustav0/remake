@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-        <record id="remake.cursos_kamico_project" model="project.project">
-            <field name="name">Cursos KAMI CO.</field>
-        </record>
-    </data>
-</odoo>
