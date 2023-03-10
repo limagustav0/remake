@@ -21,6 +21,7 @@
       'templates/campanha_mkt.xml',
       'templates/solicitacao_redes_sociais.xml',
       'templates/cursos_kamico.xml',
+      'templates/formulario_rh.xml',
   ],
   'installable': True,
   'auto_install': False,

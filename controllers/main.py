@@ -573,3 +573,9 @@ class CursosKamico(http.Controller):
 
                 })
         return http.request.render('remake.forms_success_page')
+    
+class FormularioRH(http.Controller):
+    @http.route('/formulariorh', auth='public', csrf=False, website=True)    
+    def index(self, **kw):
+        return http.request.render('remake.formulariorh')
+    
