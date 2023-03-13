@@ -68,4 +68,10 @@
         <field name="name">Formulário RH.</field>
     </record>
   </data>
+
+  <data noupdate="1">
+      <record id="remake.educacional_content_project" model="project.project">
+          <field name="name">Educacional (Content)</field>
+      </record>
+  </data>
 </odoo>

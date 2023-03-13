@@ -22,6 +22,7 @@
       'templates/solicitacao_redes_sociais.xml',
       'templates/cursos_kamico.xml',
       'templates/formulario_rh.xml',
+      'templates/educacional_content.xml',
   ],
   'installable': True,
   'auto_install': False,
