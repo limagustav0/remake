@@ -5,6 +5,7 @@ from odoo.tools.translate import _
 import base64
 from dataclasses import dataclass
 from requests import post
+from datetime import datetime
 
 class RequisicaoFachada(http.Controller):
     @http.route('/fachada', auth='public', type="http", website=True, csrf=False)
@@ -27,6 +28,7 @@ class RequisicaoFachada(http.Controller):
         date = str(post.get('data_vencimento')).replace('/', '-')
         attachment = http.request.params['task_attachment']
 
+        
         description = f"""
           <strong>Endereço completo do salão:</strong> {post.get('saloon_address')}<br></br>
           <strong>Nome do Vendedor:</strong> {post.get('seller_name')}<br></br>
@@ -274,9 +276,12 @@ class GerenciamentoInvasaoTruss(http.Controller):
     def create(self, **post):
         project_id = request.env.ref('remake.invasao_truss').id
 
+        data_recebimento = datetime.strptime(post.get('dataRecebimento'), '%Y-%m-%dT%H:%M')
+        data_recebimento_formatada = data_recebimento.strftime('%d/%m/%Y - %H:%M')
+
         description = f"""
             Tipo Notificação: {post.get('region_invasion') if post.get('region_invasion') else " "}     {post.get('invalid_sell') if post.get('invalid_sell') else " "}<br><br/>
-            Data de Recebimento: {post.get('dataRecebimento')}<br><br/>
+            Data de Recebimento: {data_recebimento_formatada}<br><br/>
             Empresa Notificada: {post.get('Movement') if post.get('Movement') else " "}     {post.get('NewHauss') if post.get('NewHauss') else " "}     {post.get('RiodeJaneiro') if post.get('RiodeJaneiro') else " "}<br><br/>
             Prazo de Resposta: {post.get('Prazo')}<br><br/>
             Número ''OCTADESK: {post.get('octadesk_number')}<br><br/>
@@ -285,7 +290,7 @@ class GerenciamentoInvasaoTruss(http.Controller):
             Prioridade: {post.get('priority')}<br><br/>
         """
         new_task = {
-            'name': 'Definir nome',
+            'name': f"Notificações TRUSS - {post.get('priority')} PRIORIDADE",
             'project_id': project_id,
             'description': description,
         }
@@ -310,6 +315,11 @@ class CriativoKamico(http.Controller):
     def create(self, **post):
         project_id = request.env.ref('remake.criativo_kami').id
 
+
+        data_prazo = datetime.strptime(post.get('data_prazo'), '%Y-%m-%dT%H:%M')
+        data_prazo_formatada = data_prazo.strftime('%d/%m/%Y - %H:%M')
+
+
         description = f"""
             Título da solicitação: {post.get('notification_title')}<br/><br/>
             Essa solicitação se refere a qual empresa KAMI?: {post.get('solicitation')}<br/><br/>
@@ -326,32 +336,30 @@ class CriativoKamico(http.Controller):
                                  {post.get('LinkedIn') if post.get('LinkedIn') else " "}<br/>
                                  {post.get('Outroslocais') if post.get('Outroslocais') else " "}<br/><br/><br/>
 
-            Inserir Logotipo: {post.get('KAMICO') if post.get('KAMICO') else " "}<br/>
-                              {post.get('SBMP') if post.get('SBMP') else " "}<br/>
-                              {post.get('TRUSSHair') if post.get('TRUSSHair') else " "}<br/>
-                              {post.get('HairSPA') if post.get('HairSPA') else " "}<br/>
-                              {post.get('HairPro') if post.get('HairPro') else " "}<br/>
-                              {post.get('LogodoCliente') if post.get('LogodoCliente') else " "}<br/>
-                              {post.get('Outros') if post.get('Outros') else " "}<br/>
-                              {post.get('SemLogo') if post.get('SemLogo') else " "}<br/><br/><br/>
+            Inserir Logotipo: {post.get('KAMICO') if post.get('KAMICO') else ""}<br/>
+                              {post.get('SBMP') if post.get('SBMP') else ""}<br/>
+                              {post.get('TRUSSHair') if post.get('TRUSSHair') else ""}<br/>
+                              {post.get('HairSPA') if post.get('HairSPA') else ""}<br/>
+                              {post.get('HairPro') if post.get('HairPro') else ""}<br/>
+                              {post.get('LogodoCliente') if post.get('LogodoCliente') else ""}<br/>
+                              {post.get('Outros') if post.get('Outros') else ""}<br/>
+                              {post.get('SemLogo') if post.get('SemLogo') else ""}<br/><br/><br/>
             
             
             Detalhes da solicitação: {post.get('solicitation_detail')}<br/><br/><br/>
 
-            Prazo de entrega estimado: {post.get('data_prazo')}<br/><br/><br/>
+            Prazo de entrega estimado: {data_prazo_formatada}<br/><br/><br/>
 
             Seu nome: {post.get('yourname')}<br/><br/><br/>
 
             Seu e-mail: {post.get('yourmail')}<br/><br/><br/>
 
-            Por onde você deseja receber o arquivo final?: {post.get('channel')}<br/><br/><br/>
+            Whatsapp: {post.get('celular')}<br/><br/><br/>
 
- 
-
-
+            Por onde você deseja receber o arquivo final?: {post.get('email')} {post.get('whatsapp')}<br/><br/><br/>
         """
         new_task = {
-            'name': 'Definir nome',
+            'name': f"Criativo - {post.get('solicitation')}",
             'project_id': project_id,
             'description': description,
         }
@@ -442,12 +450,19 @@ class CampanhaMKT(http.Controller):
     @http.route('/campanhamkt', auth='public', type="http", website=True, methods=['post'], csrf=False)
     def create(self, **post):
         project_id = request.env.ref('remake.campanhas_mkt').id
+
+        data_inicio = datetime.strptime(post.get('data_inicio'), '%Y-%m-%dT%H:%M')
+        data_inicio_formatada = data_inicio.strftime('%d/%m/%Y - %H:%M')
+
+        data_vencimento = datetime.strptime(post.get('data_vencimento'), '%Y-%m-%dT%H:%M')
+        data_vencimento_formatada = data_vencimento.strftime('%d/%m/%Y - %H:%M')
+
         description = f"""
                 <strong>Empresa:</strong> {post.get('empresa')}<br></br>
                 <strong>Ano:</strong> {post.get('ano')}<br></br>
                 <strong>Periodo:</strong> {post.get('trimestre')}<br></br>
-                <strong>Início:</strong> {post.get('data_inicio')}<br></br>
-                <strong>Vencimento do Planejamento:</strong> {post.get('data_vencimento')}<br></br>
+                <strong>Início:</strong> {data_inicio_formatada}<br></br>
+                <strong>Vencimento do Planejamento:</strong> {data_vencimento_formatada}<br></br>
                 <strong>Tipos de Campanha:</strong><br></br>
                                    {post.get('lancamento') if post.get('lancamento') else " "}<br></br>
                                    {post.get('branding') if post.get('lancamento') else " "}<br></br>
@@ -458,7 +473,7 @@ class CampanhaMKT(http.Controller):
 
         """
         new_task = {
-            'name': 'Definir nome',
+            'name': f"Campannha - {post.get('empresa')} - {post.get('ano')}",
             'project_id': project_id,
             'description': description,
         }
@@ -482,7 +497,7 @@ class SolicitacaoRedeSocial(http.Controller):
                 <strong>Data da Publicação:</strong> {post.get('pud_date')}<br></br>
         """
         new_task = {
-            'name': 'Definir nome',
+            'name': f"Social Mídia - {post.get('subject')} - {post.get('publi')}",
             'project_id': project_id,
             'description': description,
         }
@@ -497,17 +512,6 @@ class SolicitacaoRedeSocial(http.Controller):
                     'res_model': 'project.task', 
                     'res_id': new_task.id,
                 })
-        
-        if 'aditional_archives_story' in http.request.params:
-            attached_files = http.request.httprequest.files.getlist('aditional_archives_story')
-            for attachment in attached_files:
-                http.request.env['ir.attachment'].sudo().create({
-                    'name': "STORY" + attachment.filename,
-                    'datas': base64.b64encode(attachment.read()),
-                    'res_model': 'project.task',
-                    'res_id': new_task.id,
-                })
-
 
         if 'aditional_archives_layout' in http.request.params:
             attached_files = http.request.httprequest.files.getlist('aditional_archives_layout')

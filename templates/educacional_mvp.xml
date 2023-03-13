@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="educacionalmvp" name="Kami Forms - Input Nome">
-        <title>Nova requisição de fachada</title>
+        <title>Lançamento Educacional MVP</title>
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
                 <div class="row">
                     <div class="col-sm-4">
                         <img class="img-thumbnail rounded float-left" t-attf-src='remake/static/description/icon.png' style="height: 270px; width: 270px;"
                         />
-                        <h3>Requisição de fachada</h3>
+                        <h3>Marketing de Conteúdo</h3>
                         <p><i>
-                        Preencha o formulário ao lado para criar uma nova requisição de fachada.
+                        Adicione solicitações ao time de Marketing de Conteúdo.
                         </i></p>
                     </div>
                     <div class="col-sm-8">

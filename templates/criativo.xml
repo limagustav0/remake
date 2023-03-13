@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="criativo" name="Kami Forms - Input Nome">
-        <title>Nova requisição de fachada</title>
+        <title>Criativo KAMI CO.</title>
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
                 <div class="row">
                     <div class="col-sm-4">
                         <img class="img-thumbnail rounded float-left" t-attf-src='remake/static/description/icon.png' style="height: 270px; width: 270px;"
                         />
-                        <h3>Requisição de fachada</h3>
+                        <h3>Criativo KAMI CO.</h3>
                         <p><i>
-                        Preencha o formulário ao lado para criar uma nova requisição de fachada.
+                        Utilize este formulário para abrir solicitações para a equipe de criação da KAMI CO.!
                         </i></p>
                     </div>
                     <div class="col-sm-8">
@@ -26,6 +26,7 @@
                             <input required="required" type="radio" name="solicitation" value="KAMI CO. Rio Grande do Sul"> KAMI CO. Rio Grande do Sul</input><br/><br/>
                             <input required="required" type="radio" name="solicitation" value="KAMI CO. Portugal"> KAMI CO. Portugal</input><br/><br/>
                             <input required="required" type="radio" name="solicitation" value="KAMI CO. Portugal"> Hair Pro</input><br/><br/><br/>
+                            
                             
 
                             <label for="">Tipo da solicitação:</label><br/>
@@ -73,9 +74,12 @@
                             <label>*Seu e-mail:</label><br/>
                             <input required="required" type="email" name="yourmail"/><br/><br/><br/>
 
+                            <label for="celular">Celular (WhatsApp):</label><br/>
+                            <input type="tel" name="celular" id="celular" pattern="[0-9]{2}[0-9]{8,9}" required="required"/><br/><br/><br/>
+
                             <label>*Por onde você deseja receber o arquivo final?:</label><br/>
-                            <input required="required" type="radio" value="E-mail" name="channel">  E-mail</input><br/><br/>
-                            <input required="required" type="radio" value="WhatsApp" name="channel">  WhatsApp</input><br/><br/><br/>
+                            <input required="required" type="checkbox" value="E-mail" name="email">  E-mail</input><br/><br/>
+                            <input required="required" type="checkbox" value="WhatsApp" name="whatsapp">  WhatsApp</input><br/><br/><br/>
 
                             <input class="btn btn-primary" type="submit" value="Enviar"/>
                         </form>
