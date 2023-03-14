@@ -695,5 +695,29 @@ class EducacionalContent(http.Controller):
                     'res_id': new_task.id,
                 })
         return http.request.render('remake.forms_success_page')
+    
+
+class NovoProduto(http.Controller): 
+    @http.route('/novoproduto', auth='public', type="http", website=True, csrf=False)
+    def index(self, **kw):
+        companyes = http.request.env['res.company'].sudo().search([])
+        return http.request.render('remake.novoproduto')
+    
+    # @http.route('/novoproduto', type='http', auth='public', website=True, methods=['POST'], csrf=False)
+    # def create(self, **post):
+        
+    #     description = f"""
+    #         Empresa: {post.get('company_name')}<br><br/>
+    #         Número do Romaneio: {post.get('number_romaneio')}<br><br/>
+    #         Data de Saída: {post.get('exit_date')}<br><br/>
+
+    #     """
+    #     new_task = {
+    #         'name': {post.get('company_name')},
+    #         'project_id': project_id,
+    #         'description': description,
+    #     }
+    #     http.request.env["project.task"].sudo().create(new_task)
+    #     return http.request.render('remake.forms_success_page', {})
         
 

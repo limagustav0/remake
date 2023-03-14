@@ -23,6 +23,7 @@
       'templates/cursos_kamico.xml',
       'templates/formulario_rh.xml',
       'templates/educacional_content.xml',
+      'templates/novos_produtos.xml',
   ],
   'installable': True,
   'auto_install': False,
