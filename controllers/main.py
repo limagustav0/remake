@@ -727,8 +727,7 @@ class TradeMarketing(http.Controller):
     def index(self, **kw):
         users = http.request.env['res.users'].sudo().search([])
         partners = http.request.env['res.partner'].sudo().search([])
-        facade_ad_type_ids = http.request.env['kami_sm.attendance.ad_type'].sudo().search([])
-        partners = request.env['res.partner'].sudo().search([])
+
         
         return http.request.render('remake.trademarketing', {
             'partners': partners,
