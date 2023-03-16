@@ -24,6 +24,7 @@
       'templates/formulario_rh.xml',
       'templates/educacional_content.xml',
       'templates/novos_produtos.xml',
+      'templates/trade_marketing.xml',
   ],
   'installable': True,
   'auto_install': False,

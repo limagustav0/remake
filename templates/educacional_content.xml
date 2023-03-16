@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="remake.educacionalcontent">
+    <template id="educacionalcontent">
         <title>Formulário - Educacional (Content)</title>
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">

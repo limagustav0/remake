@@ -68,7 +68,7 @@ class RequisicaoFachada(http.Controller):
                     'res_model': 'kami_sm.attendance',  
                     'res_id': new_task.id,
                 })
-        return http.request.render('remake.fachada')
+        return http.request.render('remake.forms_success_page')
 
 class AudioVisual(http.Controller):
     @http.route('/audiovisual', auth='public', type="http", website=True, csrf=False)
@@ -695,13 +695,15 @@ class EducacionalContent(http.Controller):
                     'res_id': new_task.id,
                 })
         return http.request.render('remake.forms_success_page')
-    
+  
 
 class NovoProduto(http.Controller): 
     @http.route('/novoproduto', auth='public', type="http", website=True, csrf=False)
     def index(self, **kw):
-        companyes = http.request.env['res.company'].sudo().search([])
-        return http.request.render('remake.novoproduto')
+        users = http.request.env['res.users'].sudo().search([])
+        return http.request.render('remake.novoproduto', {
+            'users': users,
+        })
     
     # @http.route('/novoproduto', type='http', auth='public', website=True, methods=['POST'], csrf=False)
     # def create(self, **post):
@@ -719,5 +721,17 @@ class NovoProduto(http.Controller):
     #     }
     #     http.request.env["project.task"].sudo().create(new_task)
     #     return http.request.render('remake.forms_success_page', {})
+
+class TradeMarketing(http.Controller):
+    @http.route('/trademarketing', auth='public', type="http", website=True, csrf=False)
+    def index(self, **kw):
+        users = http.request.env['res.users'].sudo().search([])
+        partners = http.request.env['res.partner'].sudo().search([])
+        facade_ad_type_ids = http.request.env['kami_sm.attendance.ad_type'].sudo().search([])
+        partners = request.env['res.partner'].sudo().search([])
         
+        return http.request.render('remake.trademarketing', {
+            'partners': partners,
+            'users': users,
+        })
 
