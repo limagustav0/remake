@@ -10,7 +10,7 @@
               <div class="row">
                 <div id="page-left" class="card w-100 m-2">
                   <img 
-                    class="card-img-top" t-attf-src="/remake/static/description/icon.png"
+                    class="card-img-top" t-attf-src="/kami_form/static/description/icon.png"
                   />    
                   <h4 id="page-card-title" class="card-header">Concluído!</h4>
                   <div class="card-body">
@@ -33,7 +33,7 @@
                     </p>
                   </div>
                   <div id="page-right-footer" class="card-footer">
-                    <a role="button" t-att-href="web_base_url" class="btn btn-secondary mb-2">
+                    <a role="button" t-att-href="web_base_url" class="btn btn-primary mb-2">
                       Voltar ao Portal do Representante
                     </a>
                   </div>                  

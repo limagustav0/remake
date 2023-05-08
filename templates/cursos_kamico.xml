@@ -6,7 +6,7 @@
             <div class="mt-5 mb-5 container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img class="img-thumbnail rounded float-left" t-attf-src='remake/static/description/icon.png' style="height: 270px; width: 270px;"
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
                         />
                         <h3>Formulário de Cadastro do Aluno</h3>
                         <p><i>
@@ -34,18 +34,12 @@
                             </div>
                             <div class="form-group">
                                 <label style='display:block'>Classifique o Aluno</label>
-                                <input required='True' type='radio' id='Cabeleireiro' name='classificacaoAluno' value='Cabeleireiro'/>
-                                <label for='Cabeleireiro'>Cabeleireiro</label>
-                                <input required='True' type='radio' id='Cabeleireiro e Dono de Salão' name='classificacaoAluno' value='Cabeleireiro e Dono de Salão'/>
-                                <label for='Cabeleireiro e Dono de Salão'>Cabeleireiro e Dono de Salão</label>
-                                <input required='True' type='radio' id='Auxiliar de Cabeleireiro' name='classificacaoAluno' value='Auxiliar de Cabeleireiro'/>
-                                <label for='Auxiliar de Cabeleireiro'>Auxiliar de Cabeleireiro</label>
-                                <input required='True' type='radio' id='Gerente' name='classificacaoAluno' value='Gerente'/>
-                                <label for='Gerente'>Gerente</label>
-                                <input required='True' type='radio' id='Dono de Salão' name='classificacaoAluno' value='Dono de Salão'/>
-                                <label for='Dono de Salão'>Dono de Salão</label>
-                                <input required='True' type='radio' id='Recepcionista' name='classificacaoAluno' value='Recepcionista'/>
-                                <label for='Recepcionista'>Recepcionista</label>
+                                <input required='True' type='radio' id='Cabeleireiro' name='classificacaoAluno' value='Cabeleireiro'> Cabeleireiro</input><br/>
+                                <input required='True' type='radio' id='Cabeleireiro e Dono de Salão' name='classificacaoAluno' value='Cabeleireiro e Dono de Salão'> Cabeleireiro e Dono de Salão</input><br/>
+                                <input required='True' type='radio' id='Auxiliar de Cabeleireiro' name='classificacaoAluno' value='Auxiliar de Cabeleireiro'> Auxiliar de Cabeleireiro</input><br/>
+                                <input required='True' type='radio' id='Gerente' name='classificacaoAluno' value='Gerente'> Gerente</input><br/>
+                                <input required='True' type='radio' id='Dono de Salão' name='classificacaoAluno' value='Dono de Salão'> Dono de Salão</input><br/>
+                                <input required='True' type='radio' id='Recepcionista' name='classificacaoAluno' value='Recepcionista'> Recepcionista</input><br/>
                             </div>
                             <div class="form-group">
                                 <label style='display:block'>Qual nome do Salão que o Aluno trabalha?</label>
@@ -69,14 +63,10 @@
                             </div>
                             <div class="form-group">
                                 <label style='display:block'>Qual a forma de pagamento?</label>
-                                <input required='True' type='radio' id='PIX' name='formaPagamento' value='PIX'/>
-                                <label for='PIX'>PIX</label>
-                                <input required='True' type='radio' id='Boleto' name='formaPagamento' value='Boleto'/>
-                                <label for='Boleto'>Boleto</label>
-                                <input required='True' type='radio' id='Cartão' name='formaPagamento' value='Cartão'/>
-                                <label for='Cartão'>Cartão</label>
-                                <input required='True' type='radio' id='Bonificado' name='formaPagamento' value='Bonificado'/>
-                                <label for='Bonificado'>Bonificado</label>
+                                <input required='True' type='radio' id='PIX' name='formaPagamento' value='PIX'> PIX</input><br/>
+                                <input required='True' type='radio' id='Boleto' name='formaPagamento' value='Boleto'> Boleto</input><br/>
+                                <input required='True' type='radio' id='Cartão' name='formaPagamento' value='Cartão'> Cartão</input><br/>
+                                <input required='True' type='radio' id='Bonificado' name='formaPagamento' value='Bonificado'> Bonificado</input><br/>
                             </div>
                             <div class="form-group">
                                 <label style='display:block'>A qual curso se refere?</label>

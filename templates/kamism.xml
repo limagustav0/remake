@@ -1,0 +1,404 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+  <template id="kamism">
+    <title>Solicitação de Mala Técnica</title>
+    <t t-call='website.layout'>
+      <div class='mt-5 mb-5 container'>
+        <div class='row'>
+          <div class='col-sm-4'>
+            <img 
+              class='img-thumbnail rounded float-left'
+              t-attf-src='kami_form/static/description/icon.png'
+              style='height: 270px; width: 270px;'
+            />
+            <h3>Dossiê</h3>
+            <p><i>
+              Formulário para solicitação de Dossiê
+            </i></p>
+          </div>      
+          <div class='col-sm-8'>            
+            <form t-attf-action='/kamism' method='post' enctype='multipart/form-data'>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-sm-5'>
+                            <label>Tipo de atendimento:</label><br/>
+                            <input type='radio' value='6' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "block";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Degustação RJ</input><br></br><br></br>
+                            <input type='radio' value='4' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "block";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Degustação RS</input><br></br><br></br>
+                            <input type='radio' value='2' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "block";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Degustação SP</input><br></br><br></br>
+                            <input type='radio' value='5' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "block";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Dia da Beleza RJ</input><br></br><br></br>
+                            <input type='radio' value='3' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "block";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Dia da Beleza RS</input><br></br><br></br>
+                            <input type='radio' value='1' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "block";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Dia da Beleza SP</input><br></br><br></br>
+                            <input type='radio' value='8' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "block";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Treinamento Lojas</input><br></br><br></br>
+                            <input type='radio' value='9' name='types' onchange='
+                            if (this.checked) {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "block";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            } else {
+                                document.getElementById("degustation_rj").style.display = "none";
+                                document.getElementById("degustation_rs").style.display = "none";
+                                document.getElementById("degustation_sp").style.display = "none";
+                                document.getElementById("b_day_rj").style.display = "none";
+                                document.getElementById("b_day_rs").style.display = "none";
+                                document.getElementById("b_day_sp").style.display = "none";
+                                
+                                document.getElementById("training_saloon").style.display = "none";
+                                document.getElementById("training_store").style.display = "none";
+                                document.getElementById("kamism").style.display = "block";
+                            }
+                            '> Treinamento Salão</input><br></br><br></br>
+                        </div> 
+                        <div class='col-sm-5'>
+                            <div id='kamism_form' style='display:block'>
+                                <div id="degustation_rj" style='display:none'>
+                                    <label>Degustações:</label><br/>
+                                    <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                    <input name='spoon_brigadeiro' type='checkbox' value='17'> Brigadeiro de colher</input><br></br>
+                                    <input name='candied_brigadeiro' type='checkbox' value='18'> Brigadeiro Confeitado</input><br></br>
+                                    <input name='gourmet_fit_cart' type='checkbox' value='22'> Carrinho Gourmet fit - doces Lowcarb</input><br></br>
+                                    <input name='tower_macarons' type='checkbox' value='28'> Macarons em torre</input><br></br>
+                                    <input name='italian_straw' type='checkbox' value='19'> Palha Italiana</input><br></br>
+                                    <input name='popcorn_gourmet' type='checkbox' value='21'> Pipoca Gourmet</input><br></br>
+                                </div>
+                                <div id="degustation_rs" style='display:none'>
+                                    <label>Degustações:</label><br/>
+                                    <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                </div>
+                                <div id="degustation_sp" style='display:none'>
+                                    <label>Degustações:</label><br/>
+                                    <input name='cotton_candy' type='checkbox' value='5'> Algodão Doce [MAFOZ]</input><br></br>
+                                    <input name='acai_in_a_glass' type='checkbox' value='12'> Açaí no copo [MAFOZ]</input><br></br>
+                                    <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                    <input name='brigadeiro_bike' type='checkbox' value='2'> Bike de Brigadeiro</input><br></br>
+                                    <input name='churros' type='checkbox' value='13'> Churros</input><br></br>
+                                    <input name='mini_quiche' type='checkbox' value='6'> Mini quiche [MAFOZ]</input><br></br>
+                                </div>
+
+                                <div id="training_saloon" style='display:none'>
+                                    <label>Tema:</label><br/>
+                                    <input name='coloring' type='radio' value='23'> Coloração</input><br></br>
+                                    <input name='coloring_discoloring_finishers' type='radio' value='24'> Coloração + Descoloração + Finalizadores</input><br></br>
+                                    <input name='mens_line' type='radio' value='25'> Linha Masculina</input><br></br>
+                                    <input name='reduction_with_high_liss' type='radio' value='26'> Redução com High Liss</input><br></br>
+                                    <input name='home_cara_training' type='radio' value='27'> Treinamento com Home Care</input><br></br>
+                                    <input name='workstation_infusion_recoveri_finishers' type='radio' value='28'> Workstation + Infusion + K Recovery + Finalizadores</input><br></br>
+                                </div>
+
+                                <div id="training_store" style='display:none'>
+                                    <label>Tema:</label><br/>
+                                    <input name='home_cara_training_finishers' type='radio' value='kami_sm.home_cara_training_finishers'> Treinamento Home Care + Finalização</input><br></br>
+                                </div>
+
+                                <div id="b_day_rj" class='b_day' style='display:none'>
+                                    <input name='has_deg_checkbox' type='checkbox' value='1' onchange='
+                                        if (this.checked) {
+                                            document.getElementById("b_day_rj_degustation").style.display = "block";
+                                        } else {
+                                            document.getElementById("b_day_rj_degustation").style.display = "none";
+                                        }
+                                    '><strong> Tem degustação?</strong></input>
+                                    <br></br><br></br>
+
+                                    <div id='b_day_rj_degustation' style='display:none'>
+                                        <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                        <input name='candied_brigadeiro' type='checkbox' value='18'> Brigadeiro Confeitado</input><br></br>
+                                        <input name='spoon_brigadeiro' type='checkbox' value='17'> Brigadeiro de colher</input><br></br>
+                                        <input name='theme' type='checkbox' value='22'> Carrinho Gourmet fit - doces Lowcarb</input><br></br>
+                                        <input name='theme' type='checkbox' value='20'> Macarons em torre</input><br></br>
+                                        <input name='italian_straw' type='checkbox' value='19'> Palha Italiana</input><br></br>
+                                        <input name='theme' type='checkbox' value='21'> Pipoca Gourmet</input><br></br>
+                                    </div>
+                                </div>
+
+                                <div id="b_day_rs" style='display:none'>
+                                    <input name='has_deg_checkbox' type='checkbox' value='1' onchange='
+                                        if (this.checked) {
+                                            document.getElementById("b_day_rs_degustation").style.display = "block";
+                                        } else {
+                                            document.getElementById("b_day_rs_degustation").style.display = "none";
+                                        }
+                                    '><strong> Tem degustação?</strong></input>
+                                    <br></br><br></br>
+
+                                    <div id='b_day_rs_degustation' style='display:none'>
+                                        <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                    </div>
+                                </div>
+
+                                <div id="b_day_sp" style='display:none'>
+                                    <input name='has_deg_checkbox' type='checkbox' value='1' onchange='
+                                        if (this.checked) {
+                                            document.getElementById("b_day_sp_degustation").style.display = "block";
+                                        } else {
+                                            document.getElementById("b_day_sp_degustation").style.display = "none";
+                                        }
+                                    '><strong> Tem degustação?</strong></input>
+                                    <br></br><br></br>
+
+                                    <div id='b_day_sp_degustation' style='display:none'>
+                                        <input name='cotton_candy' type='checkbox' value='5'> Algodão Doce [MAFOZ]</input><br></br>
+                                        <input name='acai_in_a_glass' type='checkbox' value='12'> Açaí no copo [MAFOZ]</input><br></br>
+                                        <input name='honey_bread_candy' type='checkbox' value='7'> Bala de Pão de Mel</input><br></br>
+                                        <input name='barman' type='checkbox' value='1'> Barman</input><br></br>
+                                        <input name='brigadeiro_bike' type='checkbox' value='2'> Bike de Brigadeiro</input><br></br>
+                                        <input name='churros' type='checkbox' value='13'> Churros</input><br></br>
+                                        <input name='mini_quiche' type='checkbox' value='6'> Mini quiche [MAFOZ]</input><br></br>
+                                    </div>
+                                </div><br></br><br></br>
+                            </div>
+                        </div>   
+                    </div>
+
+                    <label>tipos de atendimento:</label><br/>
+                    <select id='types_types' class='form-control' name='client_name' required='required'>
+                        <option value='' ></option>
+                        <t t-foreach='att_types' t-as='att_type'>
+                            <option t-att-value='att_type.id' t-esc='att_type.name'/>
+                        </t>
+                    </select><br></br>
+
+                    <label>tipos:</label><br/>
+                    <select id='types_' class='form-control' name='client_name' required='required'>
+                        <option value='' ></option>
+                        <t t-foreach='att_themes' t-as='att_theme'>
+                            <option t-att-value='att_theme.id' t-esc='att_theme.name'/>
+                        </t>
+                    </select><br></br>
+
+                    <div id="kamism" style='display:block'>
+                        <label>Cliente:</label><br/>
+                        <select class='form-control' name='client_name' required='required'>
+                            <option value='' ></option>
+                            <t t-foreach='partners' t-as='partner'>
+                                <option t-att-value='partner.id' t-esc='partner.name'/>
+                            </t>
+                        </select><br></br>
+
+                        <label>Data:</label><br></br>
+                        <input class='form-control' type='date' name='date'/><br></br><br></br>
+
+                        <label>Responsavel BackOffice:</label><br></br>
+                        <select class='form-control' name='responsible' required='required'>
+                            <option value=''></option>
+                            <t t-foreach='users' t-as='user'>
+                                <option t-att-value='user.id' t-esc='user.name'/>
+                            </t>
+                        </select><br></br><br></br>
+
+                        <label>Objetivos:</label><br></br>
+                        <textarea class='form-control' name='description' rows='6' cols='50' required='True'/><br></br><br></br>
+
+                        <input type='checkbox' name='structure'><strong> Cliente possui estrutura de no mínimo 1,20cm de largura?</strong></input><br></br><br></br>
+
+                        <label>Público Esperado:</label><br></br>
+                        <input class='form-control' type='number' name='public'/><br></br><br></br>
+
+                        <label>Porte do evento:</label><br></br>
+                        <input class='form-control' type='number' name='public'/><br></br><br></br>
+
+                        <input type='checkbox' name='digital_invite' onchange='
+                        if (this.checked) {
+                            document.getElementById("check_invite").style.display = "block";
+                        } else {
+                            document.getElementById("check_invite").style.display = "none";
+                        }
+                        '><strong> Convite Digital?</strong></input><br></br><br></br>
+
+                        <div id='check_invite' style='display:none'>
+                            <label>Logo:</label>
+                            <input type='file' name='logo'/><br></br><br></br>
+
+                            <label>Detalhes do Convite:</label><br></br>
+                            <textarea class='form-control' name='detail_invite' rows='6' cols='50'/><br></br><br></br>
+                        </div>
+
+                        <label>Observações:</label><br></br>
+                        <textarea class='form-control' name='detail_invite' rows='6' cols='50'/><br></br><br></br>
+                    </div>
+
+
+                </div>
+                
+                <input class='btn btn-primary' type='submit' value='Enviar'/> 
+            </form>          
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

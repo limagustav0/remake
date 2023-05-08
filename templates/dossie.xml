@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="dossie">
+    <title>Solicitação de Mala Técnica</title>
+    <t t-call="website.layout">
+      <div class="mt-5 mb-5 container">
+        <div class="row">
+          <div class="col-sm-4">
+            <img 
+              class="img-thumbnail rounded float-left"
+              t-attf-src="kami_form/static/description/icon.png"
+              style="height: 270px; width: 270px;"
+            />
+            <h3>Dossiê</h3>
+            <p><i>
+              Formulário para solicitação de Dossiê
+            </i></p>
+          </div>      
+          <div class="col-sm-8">            
+            <form t-attf-action="/dossie" method="post" enctype="multipart/form-data">
+                <label>Nome do Salão:</label><br/>
+                <select class="form-control" name="saloon_name" required='required'>
+                    <option value='' ></option>
+                    <t t-foreach="partners" t-as="partner">
+                        <option t-att-value="partner.id" t-esc="partner.name"/>
+                    </t>
+                </select><br></br>
+
+                <label>Data:</label><br/>
+                <input type='date' name='data'/><br></br><br></br>
+
+                <label>Fotos:</label><br/>
+                <input type='file' name='attachment_pics' multiple="multiple"/><br></br><br></br>
+
+                <label>Nota Fiscal:</label><br/>
+                <input type='file' name='attachment_nf' multiple="multiple"/><br></br><br></br>
+
+                <label>Nota Fiscal:</label><br/>
+                <textarea id="solicitation_detail" name="solicitation_detail" rows="6" cols="50"></textarea><br></br><br></br>
+
+                <input class="btn btn-primary" type="submit" value="Enviar"/>
+
+            </form>          
+          </div>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

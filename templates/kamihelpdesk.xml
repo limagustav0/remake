@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="kamihelpdesk" name="Kami Forms - Input Nome">
+        <title>Abertura de Chamados</title>
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
+                        />
+                        <h3>Suporte KAMI CO.</h3>
+                        <p><i>
+                            Preencha o formulário com as informações necessárias para dar início ao processo de suporte.
+                        </i></p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form method="post" action="/abrirchamado" enctype="multipart/form-data">
+
+                            <label>Selecione o tipo do chamado:</label><br/>
+                            <input type="radio" value="3" name="types" onchange="
+                                document.getElementById('rh_category').style.display = 'block';
+                                document.getElementById('ti_category').style.display = 'none';
+                                document.getElementById('technical').style.display = 'none';
+                                document.getElementById('attachment').removeAttribute('required');
+ 
+  
+                            "> Nova Solicitação de RH - (People Culture)</input><br/><br/>
+
+                            <input type="radio" value="2" name="types" onchange="
+                                document.getElementById('rh_category').style.display = 'none';
+                                document.getElementById('ti_category').style.display = 'block';
+                                document.getElementById('technical').style.display = 'none';
+                                document.getElementById('attachment').removeAttribute('required');
+
+            
+                            "> Nova Solicitação - TI (IT TEAM)</input><br/><br/>
+
+                            <input type="radio" value="1" name="types" onchange="
+                                document.getElementById('rh_category').style.display = 'none';
+                                document.getElementById('ti_category').style.display = 'none';
+                                document.getElementById('technical').style.display = 'block';
+                                document.getElementById('attachment').removeAttribute('required');
+
+                            "> Problema Técnico - TI (IT Team)</input><br/><br/>
+
+                            <div id="rh_category" style="display:none;">
+                                <label>Categoria:</label><br/>
+                                <select class="form-control" id="rh_categories" name="rh_categories" required="True">
+                                    <option value="0"></option>
+                                    <option value="25">Solicitação de Férias</option>
+                                    <option value="26">Adiantamentos</option>
+                                    <option value="27">Sistema de Ponto</option>
+                                    <option value="28">Benefícios (VR, VT e outros...)</option>
+                                    <option value="30">Atestados e Declarações</option>
+                                    <option value="31">Empréstimos Para Colaboradores</option>
+                                    <option value="32">Assuntos Pessoais</option>
+                                    <option value="33">Currículos</option>
+                                    <option value="34">Nota Fiscal</option>
+                                </select><br/><br/>
+                            </div>
+
+                            <div id="ti_category" style="display:none;">
+                                <label>Categoria:</label><br/>
+                                <select class="form-control" id="ti_categories" name="ti_categories" required="True">
+                                    <option value="0"></option>
+                                    
+                                    <option value="13">Nova Funcionalidade</option>
+                                    <option value="14">Nova Aplicação</option>
+                                    <option value="16">Novo Equipamento</option>
+                                    <option value="17">Nova Conta de Email</option>
+                                    <option value="18">Nova Conta Em Outras Plataformas</option>
+                                </select><br/><br/>
+                            </div>
+
+                            <div id="technical" style="display:none;">
+                                <label>Categoria:</label><br/>
+                                <select class="form-control" id="tp" name="tp" required="True" onchange="teste()">
+                                    <option value="0"></option>
+                                    <option value="4">Hardware</option>
+                                    <!-- <option value="2">Wifi</option> -->
+                                    <option value="15">Internet</option>
+                                    <option value="9">Software</option>
+                                </select><br/><br/>
+                            </div>
+
+                            <script>
+                                var hardware = 0;
+
+                                function teste() {
+                                    if (document.getElementById('tp').value == '35') {
+                                        hardware = 1;
+                                    } else {
+                                        hardware = 0;
+                                    }
+
+                                    if (hardware === 1) {
+                                        var anexo = document.getElementById('attachment');
+                                        anexo.setAttribute("required", "");
+                                    } else {
+                                        var anexo = document.getElementById('attachment');
+                                        anexo.removeAttribute("required");
+                                    }
+
+                                }
+                            </script>
+  
+                            
+                            <label>Solicitante:</label><br/>
+                            <select class="form-control" id="responsible" name="responsible" required='required'>
+                                <option value=''></option>
+                                <t t-foreach="users" t-as="user">
+                                    <option t-att-value="user.id" t-esc="user.name"/>
+                                </t>
+                            </select><br/>
+
+                            <label>Assunto:</label><br/>
+                            <input type="text" class="form-control" name="subject" required="True"/><br/>
+
+                            <label>Este problema impede completamente o seu trabalho?</label><br/>
+                            <input type="radio" name="priority1" value="Não" onchange="document.getElementById('priority').style.display = 'block';
+                            "> Não</input><br/>
+                            <input type="radio" name="priority1" value="Alta - 2 horas" onchange="document.getElementById('priority').style.display = 'none';"> Sim</input><br/><br/>
+
+                            <div id="priority" style="display:none;">
+                                <label>Selecione a prioridade:</label><br/>
+                                <input type="radio" name="priority" value="Média - 24 horas"> Média - 24 horas</input><br/>
+                                <input type="radio" name="priority" value="Baixa - 72 horas"> Baixa - 72 horas</input><br/><br/>
+                            </div>
+
+                            <div id="file" style="display:block">
+                                <label>Adicionar Anexo: </label><br/>
+                                <input name="attachment" id="attachment" type="file" multiple="multiple"/><br/><br/>
+                            </div>
+
+                            <label>Descrição:</label><br/>
+                            <textarea name="description" rows="6" cols="50" required="True"/><br/><br/>
+
+                            <input class="btn btn-primary" type="submit" value="Enviar"/>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>          
+    </template>
+</odoo>

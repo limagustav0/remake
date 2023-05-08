@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="teste" name="Kami Forms - Input Nome">
+        <title>Controle de Romaneio</title>
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
+                        />
+                        <h3>Controle de Romaneio</h3>
+                        <p><i>
+                        Preencha o formulário ao lado para criar um Controle de Romaneio.
+                        </i></p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form method="post" action="/teste" enctype="multipart/form-data">
+                            <label for="inputNome">tipos de atendimento:</label><br></br>
+                            <select class="form-control" id="tipo" name="saloon_name" required='required'>
+                                <option value='' ></option>
+                                <t t-foreach="att_types" t-as="att_type">
+                                    <option t-att-value="att_type.id" t-esc="att_type.name"/>
+                                </t>
+                            </select><br></br><br></br>
+
+                            <label for="inputNome">temas de atendimento:</label><br></br>
+                            <select class="form-control" id="tema" name="saloon_name" required='required'>
+                                <option value='' ></option>
+                                <t t-foreach="att_themes" t-as="att_theme">
+                                    <option t-att-value="att_theme.id" t-esc="att_theme.name"/>
+                                </t>
+                            </select><br></br><br></br>
+                            
+
+                            
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>          
+    </template>
+</odoo>

@@ -6,7 +6,7 @@
             <div class="mt-5 mb-5 container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img class="img-thumbnail rounded float-left" t-attf-src='remake/static/description/icon.png' style="height: 270px; width: 270px;"/>
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"/>
                         <h3>Requisição de fachada</h3>
                         <p><i>
                             Preencha o formulário ao lado para criar uma nova requisição de fachada.

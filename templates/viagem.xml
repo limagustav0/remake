@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="viagem" name="Kami Forms - Input Nome">
+        <title>Solicitação de Agendamento de Viagens</title>
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
+                        />
+                        <h3>Solicitação de Agendamento de Viagens</h3>
+                        <p><i>
+                        Preencha o formulário ao lado para criar uma Solicitação de Agendamento de Viagens.
+                        </i></p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form method="post" action="/viagem" enctype="multipart/form-data">
+                            <label>Empresa:</label><br/>
+                            <select id='company' class='form-control' name='empresa' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='companyes' t-as='company'>
+                                    <option t-att-value='company.id' t-esc='company.name'/>
+                                </t>
+                            </select><br></br>
+
+                            <label>Solicitante:</label><br/>
+                            <select id='responsible' class='form-control' name='responsible' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='users' t-as='user'>
+                                    <option t-att-value='user.id' t-esc='user.name'/>
+                                </t>
+                            </select><br></br>
+
+                            <script>
+                                function mascara_cpf(i){
+   
+                                    var v = i.value;
+                                    
+                                    if(isNaN(v[v.length-1])){
+                                        i.value = v.substring(0, v.length-1);
+                                        return;
+                                    }
+                                    
+                                    i.setAttribute("maxlength", "14");
+                                    if (v.length == 3 || v.length == 7) i.value += ".";
+                                    if (v.length == 11) i.value += "-";
+
+                                }
+
+                                function mascara_cnpj(i) {
+                                    var v = i.value;
+
+                                    if(isNaN(v[v.length-1])){ 
+                                        i.value = v.substring(0, v.length-1);
+                                        return;
+                                    }
+                                    
+                                    i.setAttribute("maxlength", "18");
+                                    if (v.length == 2 || v.length == 6) i.value += ".";
+                                    if (v.length == 10) i.value += "/";
+                                    if (v.length == 15) i.value += "-";
+
+                                }
+                                function mascara_rg(i) {
+                                    var v = i.value;
+
+                                    if(isNaN(v[v.length-1])){ 
+                                        i.value = v.substring(0, v.length-1);
+                                        return;
+                                    }
+                                    
+                                    i.setAttribute("maxlength", "12");
+                                    if (v.length == 2 || v.length == 6) i.value += ".";
+                                    if (v.length == 10) i.value += "-";
+
+
+                                }
+                            </script>
+
+                            <label>CPF:</label><br/>
+                            <input placeholder="Somente números" name="cpf" autocomplete="off" class="form-control" oninput="mascara_cpf(this)" type="text"/><br></br><br></br>
+
+
+                            <label>RG:</label><br/>
+                            <input placeholder="Somente números" name="rg" autocomplete="off" class="form-control" oninput="mascara_rg(this)" type="text"/><br></br><br></br>
+
+
+                            <label for="data_nascimento">Data de Nascimento:</label>
+                            <input required="required" class="form-control" type="date" id="data_nascimento" name="data_nascimento"/><br></br><br></br>
+
+                            <label>E-mail:</label><br/>
+                            <select id='email' class='form-control' name='email' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='users' t-as='user'>
+                                    <option t-att-value='user.id' t-esc='user.email'/>
+                                </t>
+                            </select><br></br>
+
+                            <label>Aeroporto/ Rodoviaria Saida:</label>
+                            <textarea class="form-control" name="aeroporto_exit" rows="2" cols="50"/><br></br><br></br>
+
+                            <label>Aeroporto/ Rodoviaria Entrada:</label>
+                            <textarea class="form-control" name="aeroporto_entrance" rows="2" cols="50"/><br></br><br></br>
+
+                            <label>Data de Saída:</label>
+                            <input class="form-control" type="date" name="date_exit"/><br></br><br></br>
+
+                            <label>Hora de Saída:</label>
+                            <input class="form-control" type="time" name="hour_exit"/><br></br><br></br>
+
+                            <label>Data de Entrada:</label>
+                            <input class="form-control" type="date" name="date_entrance"/><br></br><br></br>
+
+                            <label>Hora de Entrada:</label>
+                            <input class="form-control" type="time" name="hour_entrance"/><br></br><br></br>
+
+                            <label>Local do compromisso para reserva da Hospedagem:</label>
+                            <textarea class="form-control" name="accommodation" rows="2" cols="50"/><br></br><br></br>
+
+                            <input class="btn btn-primary" type="submit" value="Enviar"/>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>          
+    </template>
+</odoo>

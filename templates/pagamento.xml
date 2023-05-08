@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pagamento" name="Kami Forms - Input Nome">
+        <title>Solicitação de pagamentos</title>
+        <t t-call="website.layout">
+            <div class="mt-5 mb-5 container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
+                        />
+                        <h3>Solicitação de pagamentos</h3>
+                        <p><i>
+                        Preencha o formulário ao lado para criar uma Solicitação de pagamentos.
+                        </i></p>
+                    </div>
+                    <div class="col-sm-8">
+                        <form method="post" action="/pagamento" enctype="multipart/form-data">
+
+                            <label>Empresa:</label><br/>
+                            <select id='company' class='form-control' name='client_name' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='companyes' t-as='company'>
+                                    <option t-att-value='company.id' t-esc='company.name'/>
+                                </t>
+                            </select><br></br>
+
+                            <label>Solicitante:</label><br/>
+                            <select id='responsible' class='form-control' name='responsible' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='users' t-as='user'>
+                                    <option t-att-value='user.id' t-esc='user.name'/>
+                                </t>
+                            </select><br></br>
+
+                            <label>Área:</label><br/>
+                            <select id='area' class='form-control' name='client_name' required='required'>
+                                <option value='' ></option>
+                                <t t-foreach='teams' t-as='team'>
+                                    <option t-att-value='team.id' t-esc='team.name'/>
+                                </t>
+                            </select><br></br>
+
+                            <label>Faça uma descrição do produto ou serviço:</label><br/>
+                            <textarea  class="form-control" name="product_description" rows="6" cols="50" required="True"/><br></br><br></br>
+
+                            <label>Descreva a necessidade do pagamento:</label><br/>
+                            <textarea class="form-control" name="payment_description" rows="6" cols="50" required="True"/><br></br><br></br>
+
+                            <label>Moeda:</label><br/>
+                            <select required="required" class="form-control" name="moeda">
+                                <option value="">Selecione uma moeda</option>
+                                <option value="USD">Dólar americano (USD)</option>
+                                <option value="EUR">Euro (EUR)</option>
+                                <option value="GBP">Libra esterlina (GBP)</option>
+                                <option value="JPY">Iene japonês (JPY)</option>
+                                <option value="CAD">Dólar canadense (CAD)</option>
+                                <option value="AUD">Dólar australiano (AUD)</option>s
+                                <option value="NZD">Dólar neozelandês (NZD)</option>
+                                <option value="CHF">Franco suíço (CHF)</option>
+                                <option value="HKD">Dólar de Hong Kong (HKD)</option>
+                                <option value="SGD">Dólar de Singapura (SGD)</option>
+                                <option value="MXN">Peso mexicano (MXN)</option>
+                                <option value="BRL">Real brasileiro (BRL)</option>
+                                <option value="ARS">Peso argentino (ARS)</option>
+                                <option value="CNY">Yuan chinês (CNY)</option>
+                                <option value="INR">Rupia indiana (INR)</option>
+                                <option value="RUB">Rublo russo (RUB)</option>
+                                <option value="TRY">Lira turca (TRY)</option>
+                            </select><br></br><br></br>
+
+                            <label>Valor:</label><br/>
+                            <input required="required" class="form-control" type="number" name="valor"/><br></br><br></br>
+
+                            <label>Digite o número da Nota Fiscal:</label><br/>
+                            <input class="form-control" type="text" name="nf_number"/><br></br><br></br>
+
+                            <label>Anexe a Nota Fiscal:</label><br/>
+                            <input class="form-control" type="file" name="nf"/><br></br><br></br>
+
+                            <label for="data-vencimento">Data do vencimento:</label>
+                            <input required="required" class="form-control" type="date" id="data_vencimento" name="data_vencimento"/><br></br><br></br>
+
+                            <label for="data-recebimento">Data do recebimento:</label>
+                            <input required="required" class="form-control" type="date" id="data_recebimento" name="data_recebimento"/><br></br><br></br>
+
+                            <script>
+                                function mascara_cpf(i){
+   
+                                    var v = i.value;
+                                    
+                                    if(isNaN(v[v.length-1])){
+                                        i.value = v.substring(0, v.length-1);
+                                        return;
+                                    }
+                                    
+                                    i.setAttribute("maxlength", "14");
+                                    if (v.length == 3 || v.length == 7) i.value += ".";
+                                    if (v.length == 11) i.value += "-";
+
+                                }
+
+                                function mascara_cnpj(i) {
+                                    var v = i.value;
+
+                                    if(isNaN(v[v.length-1])){ 
+                                        i.value = v.substring(0, v.length-1);
+                                        return;
+                                    }
+                                    
+                                    i.setAttribute("maxlength", "18");
+                                    if (v.length == 2 || v.length == 6) i.value += ".";
+                                    if (v.length == 10) i.value += "/";
+                                    if (v.length == 15) i.value += "-";
+
+                                }
+                            </script>
+
+                            <label>Selecione:</label><br/>
+                            <input required="required" name="natureza" type="radio" id="CNPJ" value="CNPJ" onchange='
+                                document.getElementById("cnpj_field").style.display="block";
+                                document.getElementById("cnpj_field").setAttribute("required", "");
+                                document.getElementById("cpf_field").style.display="none";
+                                document.getElementById("cpf_field").removeAttribute("required");
+                            '> CNPJ</input><br/><br/>
+                            <input required="required" name="natureza" type="radio" id="CPF" value="CPF" onchange='
+                                document.getElementById("cnpj_field").style.display="none";
+                                document.getElementById("cnpj_field").removeAttribute("required");
+                                document.getElementById("cpf_field").style.display="block";
+                                document.getElementById("cpf_field").setAttribute("required", "");
+                            '> CPF</input><br></br><br></br>
+
+                            <div name="cpf_cnpj" id="cpf_field" style="display:none">
+                                <label>Digite o CPF do Fornecedor:</label><br/>
+                                <input name="cpf" autocomplete="off" class="form-control" oninput="mascara_cpf(this)" type="text"/><br></br><br></br>
+                            </div>
+
+                            <div name="cpf_cnpj" id="cnpj_field" style="display:none">
+                                <label>Digite o CNPJ do Fornecedor:</label>
+                                <input name="cnpj" autocomplete="off" class="form-control" oninput="mascara_cnpj(this)" type="text" /><br></br><br></br>
+                            </div>
+
+                            <label>Método de pagamento:</label><br/>
+                            <input required="required" name="payment_method" type="radio" id="payment_method" value="Pix" onchange='
+                                document.getElementById("pix_info").style.display="block";
+                                document.getElementById("pix_info").setAttribute("required", "");
+                                document.getElementById("bank_info").style.display="none";
+                                document.getElementById("bank_info").removeAttribute("required");
+                                document.getElementById("boleto").style.display="none";
+                                document.getElementById("boleto").removeAttribute("required");
+                            '> PIX</input><br></br><br></br>
+                            <input required="required" name="payment_method" type="radio" id="payment_method" value="Transferencia Bancária" onchange='
+                                document.getElementById("bank_info").style.display="block";
+                                document.getElementById("bank_info").setAttribute("required", "");
+                                document.getElementById("pix_info").style.display="none";
+                                document.getElementById("pix_info").removeAttribute("required");
+                                document.getElementById("boleto").style.display="none";
+                                document.getElementById("boleto").removeAttribute("required");
+                            '> Transferência Bancária</input><br></br><br></br>
+                            <input required="required" name="payment_method" type="radio" id="payment_method" value="Boleto" onchange='
+                                document.getElementById("bank_info").style.display="none";
+                                document.getElementById("bank_info").removeAttribute("required");
+                                document.getElementById("pix_info").style.display="none";
+                                document.getElementById("pix_info").removeAttribute("required");
+                                document.getElementById("boleto").style.display="block";
+                                document.getElementById("boleto").setAttribute("required", "");
+                            '> Boleto</input><br></br><br></br>
+
+                            <div id="bank_info" name="bank_info" style="display:none">
+                                <label>Digite o nome do Banco do Fornecedor:</label><br/>
+                                <input required="required" name="bank_name" class="form-control" type="text" id="bank_name"/><br></br><br></br>
+
+                                <label>Digite o número do Banco do Fornecedor:</label><br/>
+                                <input required="required" name="bank_number" maxlength="3" class="form-control" type="text" id="bank"/><br></br><br></br>
+
+                                <label>Agência:</label><br/>
+                                <input required="required" name="agency" maxlength="4" class="form-control" type="text" id="agency"/><br></br><br></br>
+
+                                <label>Conta corrente:</label><br/>
+                                <input required="required" name="curreny_account" maxlength="9" class="form-control" type="text" id="current_account"/><br></br><br></br>
+                            </div>
+
+                            <div id="pix_info" style="display:none">
+                                <label>Digite a sua chave Pix:</label><br/>
+                                <input required="required" name="pix_key" class="form-control" type="text" id="pix"/><br></br><br></br>
+                            </div>
+
+                            <div id='boleto' style="display:none">
+                                <label>Anexe o boleto:</label><br/>
+                                <input required="required" id="boleto" class="form-control" type="file"/><br></br><br></br>
+                            </div>
+
+                            <input class='btn btn-primary' type='submit' value='Enviar'/>                             
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>          
+    </template>
+</odoo>

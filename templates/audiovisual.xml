@@ -1,325 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="audiovisual">
+    <template id="audiovisual" name="Kami Forms - Input Nome">
+        <title>Solicitações de Marketing</title>
         <t t-call="website.layout">
             <div class="mt-5 mb-5 container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img
-                            class="img-thumbnail rounded float-left"
-                            t-attf-src='remake/static/description/icon.png'
-                            style="height: 270px; width: 270px;"
+                        <img class="img-thumbnail rounded float-left" t-attf-src='kami_form/static/description/icon.png' style="height: 270px; width: 270px;"
                         />
-                        <h3>Solicitações de Marketing
-                        </h3>
-                        <p>
-                            <i>
-                                Utilize este formulário para abrir solicitações para a equipe de
-                                marketing!
-                            </i>
-                        </p>
+                        <h3>Solicitações de Marketing</h3>
+                        <p><i>
+                        Utilize este formulário para abrir solicitações para a equipe de marketing!
+                        </i></p>
                     </div>
                     <div class="col-sm-8">
+                        <form method="post" action="/audiovisual" enctype="multipart/form-data">
+                            <label for="inputNome">*Seu nome:</label><br></br>
+                            <select name="partner_name" required='required'>
+                                <option value='' ></option>
+                                <t t-foreach="partners" t-as="partner">
+                                    <option t-att-value="partner.id" t-esc="partner.name"/>
+                                </t>
+                            </select><br></br><br></br>
 
-                        <form
-                            class="col-md-6"
-                            t-attf-action="/audiovisual"
-                            method="post"
-                            enctype="multipart/form-data">
+                            <label for="inputNome">*Departamento:</label><br></br>
+                            <input type="text" name="department" required="required"/><br></br><br></br>
 
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label for="nome" style='display:block'>Seu nome:</label>
-                                    <select name="nome" id="nome">
-                                        <option value="null">Selecione uma opção</option>
-                                        <t t-foreach="users" t-as="user">
-                                            <option t-att-value="user.id" t-esc="user.name" />
-                                        </t>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company" style='display:block'>Departamento:</label>
-                                    <select name="company" id="company">
-                                        <option value="null">Selecione uma opção</option>
-                                        <t t-foreach="company" t-as="company">
-                                            <option t-att-value="company.id" t-esc="company.name" />
-                                        </t>
-                                    </select>
-                                </div>
-                                <label style='display:block'>Título da solicitação</label>
-                                <input type='text' name='tituloSolicitacao'></input>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Demanda</label>
-                                <input type='radio' id='Edição' name='demanda' value='Edição'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifCaptacao').style.display = 'none';
-                            }
-                            " />
-                                <label for='Edição'>Edição</label>
-                                <input type='radio' id='Captação' name='demanda' value='Captação'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifCaptacao').style.display = 'block';
-                            }
-                            " />
-                                <label for='Captação'>Captação</label>
-                                <input
-                                    type='radio'
-                                    id='Captação e Edição'
-                                    name='demanda'
-                                    value='Captação e Edição'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifCaptacao').style.display = 'block';
-                            }
-                            " />
-                                <label for='Captação e Edição'>Captação e Edição</label>
-                                <div style='display: none' id='ifCaptacao'>
-                                    <label style='display:block'>Data da captação:</label>
-                                    <input type='date' name='dataCaptacao'></input>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <lenged>Precisa de fotos?</lenged>
-                                <input type='radio' id='Sim' name='precisaFoto' value='Sim' />
-                                <label for='Sim'>Sim</label>
-                                <input type='radio' id='Não' name='precisaFoto' value='Não' />
-                                <label for='Não'>Não</label>
-                            </div>
-                            <div class="form-group">
-                                <lenged>Qual resolução?</lenged>
-                                <input type='radio' id='Full HD' name='resolucao' value='Full HD' />
-                                <label for='Full HD'>Full HD</label>
-                                <input type='radio' id='4K' name='resolucao' value='4K' />
-                                <label for='4K'>4K</label>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label style='display:block'>Essa solicitação se refere a qual
-                                        empresa KAMI?</label>
-                                    <input type='radio' id='KAMI for Business' name='referenteKami'
-                                        value='KAMI for Business' />
-                                    <label for='KAMI for Business'>KAMI for Business</label>
-                                    <input type='radio' id='KAMI CO. São Paulo' name='referenteKami'
-                                        value='KAMI CO. São Paulo' />
-                                    <label for='KAMI CO. São Paulo'>KAMI CO. São Paulo</label>
-                                    <input type='radio' id='KAMI CO. Rio de Janeiro'
-                                        name='referenteKami' value='KAMI CO. Rio de Janeiro' />
-                                    <label for='KAMI CO. Rio de Janeiro'>KAMI CO. Rio de Janeiro</label>
-                                    <input type='radio' id='KAMI CO. Rio Grande do Sul'
-                                        name='referenteKami' value='KAMI CO. Rio Grande do Sul' />
-                                    <label for='KAMI CO. Rio Grande do Sul'>KAMI CO. Rio Grande do
-                                        Sul</label>
-                                    <input type='radio' id='KAMI CO. Portugal' name='referenteKami'
-                                        value='KAMI CO. Portugal' />
-                                    <label for='KAMI CO. Portugal'>KAMI CO. Portugal</label>
-                                </div>
-                                <div class="form-group">
-                                    <input type='radio' id='Beautyline' name='referenteKami'
-                                        value='Beautyline' />
-                                    <label for='Beautyline'>Beautyline</label>
-                                    <input type='radio' id='Kami Cabeleireiros' name='referenteKami'
-                                        value='Kami Cabeleireiros' />
-                                    <label for='Kami Cabeleireiros'>Kami Cabeleireiros</label>
-                                    <input type='radio' id='Kiosk L Oreal' name='referenteKami'
-                                        value='Kiosk LOreal' />
-                                    <label for='Kiosk L Oreal'>Kiosk L'Oreal</label>
-                                    <input type='radio' id='Hair Pro' name='referenteKami'
-                                        value='Hair Pro' />
-                                    <label for='Hair Pro'>Hair Pro</label>
-                                    <input type='radio' id='Grupo KAMI' name='referenteKami'
-                                        value='Grupo KAMI' />
-                                    <label for='Grupo KAMI'>Grupo KAMI</label>
-                                    <input type='radio' id='Medical Clean' name='referenteKami'
-                                        value='Medical Clean' />
-                                    <label for='Medical Clean'>Medical Clean</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Proporção do arquivo</label>
-                                <input type='checkbox' name='quadrado'
-                                    value='Quadrado 1:1 (1080x1080)'>Quadrado 1:1 (1080x1080)</input>
-                                <input type='checkbox' name='vertical'
-                                    value='Vertical 9:16 (1080x1920)'>Vertical 9:16 (1080x1920)</input>
-                                <input type='checkbox' name='horizontal'
-                                    value='Horizontal 16:9 (1920x1080)'>Horizontal 16:9 (1920x1080)</input>
-                                <input type='checkbox' name='ig' value='IG 4:5 (1080x1350)'>IG 4:5
-                                    (1080x1350)</input>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Tempo de vídeo estimado?</label>
-                                <input type="time" class="form-control" id="timepicker" />
+                            <label for="inputNome">*Título da solicitação:</label><br></br>
+                            <input type="text" name="title_solicitation" required="required"/><br></br><br></br>
 
-                                <!--Time
-                                picker -->
+                            <label>*Demanda</label><br/>
+                            <input required="required" type="radio" name="demand" value="Edição" onchange="document.getElementById('captation_date').style.display = 'none';document.getElementById('captation_date_edition').style.display = 'none'"> Edição</input><br/>
+                            <input required="required" type="radio" name="demand" value="Captação" onchange="document.getElementById('captation_date').style.display = 'block';document.getElementById('captation_date_edition').style.display = 'none'"> Captação</input><br/>
+                            <input required="required" type="radio" name="demand" value="Captação e Edição" onchange="document.getElementById('captation_date_edition').style.display = 'block';document.getElementById('captation_date').style.display = 'none'"> Captação e Edição</input><br/>
+
+                            <div id="captation_date" style="display:none">
+                                <label>Data da captação:</label>
+                                <input type="date" name="captation_date"/>
+                            </div>
+
+                            <div id="captation_date_edition" style="display:none">
+                                <label>Data da captação:</label>
+                                <input type="date" name="captation_date_edition"/>
+                            </div><br/><br/>
+                            
+                            <label>*Precisa de fotos?</label><br/>
+                            <input required="required" type="radio" name="need_photo" value="Sim">Sim</input><br/>
+                            <input required="required" type="radio" name="need_photo" value="Não">Não</input><br/><br/>
+                            
+                            <label>*Qual resolução?</label><br/>
+                            <input required="required" type="radio" name="resolution" value="Full HD">Full HD</input><br/>
+                            <input required="required" type="radio" name="resolution" value="4 K">4 K</input><br/><br/>
+
+                            <label>Essa solicitação se refere a qual empresa KAMI?</label><br/>
+                            <input required="required" type="radio" name="kami_company" value="KAMI for Business"> KAMI for Business</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="KAMI CO. São Paulo"> KAMI CO. São Paulo</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="KAMI CO. Rio de Janeiro"> KAMI CO. Rio de Janeiro</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="KAMI CO. Rio Grande do Sul"> KAMI CO. Rio Grande do Sul</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="KAMI CO. Portugal"> KAMI CO. Portugal</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Beautyline"> Beautyline</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Kami Cabeleireiros"> Kami Cabeleireiros</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Kiosk L'Oreal"> Kiosk L'Oreal</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Hair Pro"> Hair Pro</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Grupo KAMI"> Grupo KAMI</input><br/>
+                            <input required="required" type="radio" name="kami_company" value="Medical Clean"> Medical Clean</input><br/><br/>
+
+                            <label>Proporção do arquivo:</label><br/>
+                            <input type="checkbox" name="file_proportion1" value="Quadrado 1:1 (1080x1080)"> Quadrado 1:1 (1080x1080)</input><br/>
+                            <input type="checkbox" name="file_proportion2" value="Vertical 9:16 (1080x1920)"> Vertical 9:16 (1080x1920)</input><br/>
+                            <input type="checkbox" name="file_proportion3" value="Horizontal 16:9 (1920x1080)"> Horizontal 16:9 (1920x1080)</input><br/>
+                            <input type="checkbox" name="file_proportion4" value="IG 4:5 (1080x1350)"> IG 4:5 (1080x1350)</input><br/><br/>
+
+                            <label>Tempo de vídeo estimado?</label><br/>
+                            <input required="required" type="text" name="time_video"/><br/><br/>
+
+                            <label>Onde deseja compartilhá-la?</label><br/>
+                            <input type="checkbox" name="share1" value="Youtube"> Youtube</input><br/>
+                            <input type="checkbox" name="share2" value="Facebook"> Facebook</input><br/>
+                            <input type="checkbox" name="share3" value="Instagram"> Instagram</input><br/>
+                            <input type="checkbox" name="share4" value="WhatsApp"> WhatsApp</input><br/>
+                            <input type="checkbox" name="share5" value="Stories"> Stories</input><br/>
+                            <input type="checkbox" name="share6" value="LinkedIn"> LinkedIn</input><br/>
+                            <input type="checkbox" name="share7" value="Outros locais"> Outros locais</input><br/>
+                            <input type="checkbox" name="share8" value="Reels"> Reels</input><br/><br/>
+
+                            <label>*Trilha ou referência de trilha:</label><br/>
+                            <input placeholder="eletrônica, ou link referência" required="required" type="text" name="trilha"/><br/><br/>
 
 
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Onde deseja compartilhá-la?</label>
-                                <input type='checkbox' name='Youtube' value='Youtube'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    Youtube</input>
-                                <input type='checkbox' name='Facebook' value='Facebook'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    Facebook</input>
-                                <input type='checkbox' name='Instagram' value='Instagram'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    Instagram</input>
-                                <input type='checkbox' name='WhatsApp' value='WhatsApp'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    WhatsApp</input>
-                                <input type='checkbox' name='Stories' value='Stories'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    Stories</input>
-                                <input type='checkbox' name='LinkedIn' value='LinkedIn'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    LinkedIn</input>
-                                <input type='checkbox' name='Reels' value='Reels'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'none';
-                            }
-                            ">
-                                    Reels</input>
-                                <input type='checkbox' name='Outros locais' value='Outros locais'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifOutrosLocais').style.display = 'block';
-                            }
-                            ">Outros
-                                    locais</input>
+                            <label>*Lettering/GC:</label><br/>
+                            <input required="required" type="radio" name="Lettering" value="Sim" onchange="document.getElementById('Letteringarea').style.display = 'block'"> Sim</input><br/>
+                            <input required="required" type="radio" name="Lettering" value="Não" onchange="document.getElementById('Letteringarea').style.display = 'none'"> Não</input><br/><br/>
 
-                                <div style='display: none' id='ifOutrosLocais'>
-                                    <label style='display:block'>Quais outros locais?</label>
-                                    <input type='text' name='outrosLocais'></input>
-                                </div>
+                            <div id="Letteringarea" style="display:none">
+                                <label>O que?:</label><br/>
+                                <textarea id="Letteringtext" name="Letteringtext" rows="6" cols="50"></textarea><br></br><br></br>
                             </div>
-                            <div class="form-group">
-                                <label style='display:block'>Trilha ou referência de trilha:</label>
-                                <input type='text' name='trilhaReferencia'></input>
+
+                            <label>*Incluir logotipo?:</label><br/>
+                            <input required="required" type="radio" name="logotipo" value="Sim" onchange="document.getElementById('logo_div').style.display = 'block'"> Sim</input><br/>
+                            <input required="required" type="radio" name="logotipo" value="Não" onchange="document.getElementById('logo_div').style.display = 'none'"> Não</input><br/><br/>    
+                            
+                            <div id="logo_div" style="display:none">
+                                <label>*Onde?:</label><br/>
+                                <input type="radio" name="logo_radio" value="Centro">Centro</input><br/>
+                                <input type="radio" name="logo_radio" value="Centro superior">Centro superior</input><br/>
+                                <input type="radio" name="logo_radio" value="Centro inferior">Centro inferior</input><br/>
+                                <input type="radio" name="logo_radio" value="Inferior direito">Inferior direito</input><br/>
+                                <input type="radio" name="logo_radio" value="Inferior esquerdo">Inferior esquerdo</input><br/>
+                                <input type="radio" name="logo_radio" value="Superior direito">Superior direito</input><br/>
+                                <input type="radio" name="logo_radio" value="Superior esquerdo">Superior esquerdo</input><br/><br/>
                             </div>
-                            <div class="form-group">
-                                <label style='display:block'>Lettering/GC</label>
-                                <input type='radio' id='Sim' name='lettering' value='Sim'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifLettering').style.display = 'block';
-                            }
-                            " />
-                                <label for='Sim'>Sim</label>
-                                <input type='radio' id='Não' name='lettering' value='Não'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifLettering').style.display = 'none';
-                            }
-                            " />
-                                <label for='Não'>Não</label>
-                                <div style='display: none' id='ifLettering'>
-                                    <label style='display:block'>O que?</label>
-                                    <textarea rows='8' cols='40' style="resize:none" name='oQue'></textarea>
-                                </div>
+
+                            <label>Animação?:</label><br/>
+                            <input required="required" type="radio" name="animation" value="Sim" onchange="document.getElementById('animation_div').style.display = 'block'">Sim</input><br/>
+                            <input required="required" type="radio" name="animation" value="Não" onchange="document.getElementById('animation_div').style.display = 'none'">Não</input><br/><br/>
+
+                            <div id="animation_div" style="display:none">
+                                <label>Referência:</label><br/>
+                                <textarea id="reference" name="reference" rows="6" cols="50"></textarea><br></br><br></br>
                             </div>
-                            <div class="form-group">
-                                <label style='display:block'>Incluir logotipo?</label>
-                                <input type='radio' id='Sim' name='incluiLogotipo' value='Sim'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifLogo').style.display = 'block';
-                            }
-                            " />
-                                <label for='Sim'>Sim</label>
-                                <input type='radio' id='Não' name='incluiLogotipo' value='Não'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifLogo').style.display = 'none';
-                            }
-                            " />
-                                <label for='Não'>Não</label>
-                                <div style='display: none' id='ifLogo'>
-                                    <label style='display:block'>Onde?</label>
-                                    <select name='logotipoLocal'>
-                                        <option value='null'>Escolha uma opção</option>
-                                        <option value='Centro'>Centro</option>
-                                        <option value='Centro superior'>Centro superior</option>
-                                        <option value='Centro inferior'>Centro inferior</option>
-                                        <option value='Inferior direito'>Inferior direito</option>
-                                        <option value='Inferior esquerdo'>Inferior esquerdo</option>
-                                        <option value='Superior direito'>Superior direito</option>
-                                        <option value='Superior esquerdo'>Superior esquerdo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Animação?</label>
-                                <input type='radio' id='Sim' name='animacao' value='Sim'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifAnimacao').style.display = 'block';
-                            }
-                            " />
-                                <label for='Sim'>Sim</label>
-                                <input type='radio' id='Não' name='animacao' value='Não'
-                                    t-attf-onchange="
-                            if (this.checked) {
-                                document.getElementById('ifAnimacao').style.display = 'none';
-                            }
-                            " />
-                                <label for='Não'>Não</label>
-                                <div style='display: none' id='ifAnimacao'>
-                                    <label style='display:block'>Referência:</label>
-                                    <textarea rows='8' cols='40' style="resize:none"
-                                        name='referencia'></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Anexo:</label>
-                                <input type='file' name='task_attachment' multiple='True'></input>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Detalhes da solicitação:</label>
-                                <textarea rows='8' cols='40' style="resize:none"
-                                    name='detalhesSolicitacao'></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Briefing/Roteiro:</label>
-                                <textarea rows='8' cols='40' style="resize:none" name='briefing'></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label style='display:block'>Prazo de entrega estimado</label>
-                                <input type='date' name='prazoEntrega'></input>
-                            </div>
-                            <input class="btn btn-primary" type="submit" value="Enviar" />
+
+                            <label>Anexos? Sinta-se a vontade para anexar referências que nos ajudem a criar sua solicitação.</label><br></br><input type="file" name="attachment"/><br></br><br></br>
+
+                            <label>Detalhes da solicitação?:</label><br/>
+                            <textarea id="solicitation_detail" name="solicitation_detail" rows="6" cols="50" required='required'></textarea><br></br><br></br>
+
+                            <label>Briefing/Roteiro:</label><br/>
+                            <textarea id="briefing" name="briefing" rows="6" cols="50" required='required'></textarea><br></br><br></br>
+
+                            <label>Prazo de entrega estimado:</label><br/>
+                            <input required="required" type="datetime-local" name="prazo_data"/><br/><br/><br/>
+                            
+                            <input type="submit" value="Enviar"/>
                         </form>
                     </div>
                 </div>
             </div>
-        </t>
+        </t>          
     </template>
 </odoo>
